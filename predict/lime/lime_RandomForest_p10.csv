@@ -1,0 +1,301 @@
+test_row_index,model,progress_pct,lime_feature,lime_weight
+4254,RandomForest,10.0,active_days > 20.00,-0.04301199362625831
+4254,RandomForest,10.0,clk_htmlactivity > 0.00,-0.03742260293696143
+4254,RandomForest,10.0,min_score > 80.00,-0.0314398103648925
+4254,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.027850573058903545
+4254,RandomForest,10.0,last_score > 80.00,-0.027465337422611306
+4254,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.024741187982316788
+4254,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.024330038114936323
+4254,RandomForest,10.0,mean_score > 80.00,-0.02355809501332082
+4254,RandomForest,10.0,clicks_total > 438.00,-0.02348656294078794
+4254,RandomForest,10.0,code_module_AAA <= 0.00,0.01939644092771868
+4254,RandomForest,10.0,clicks_last14 > 202.00,-0.018793313655852757
+4254,RandomForest,10.0,clk_quiz > 55.00,-0.01786724577112545
+4254,RandomForest,10.0,clk_dualpane <= 0.00,0.015424843152995759
+4254,RandomForest,10.0,imd_band_0-10% > 0.00,0.014045101432442328
+4254,RandomForest,10.0,clk_dataplus <= 0.00,-0.007400128502248738
+3644,RandomForest,10.0,clk_dualpane <= 0.00,0.030255389159955858
+3644,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.027300524832066617
+3644,RandomForest,10.0,clk_quiz > 55.00,-0.022596306795844092
+3644,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.021702095035991423
+3644,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.020616699478209478
+3644,RandomForest,10.0,clk_ouwiki <= 6.00,0.013925289123934209
+3644,RandomForest,10.0,20.00 < clk_oucontent <= 78.00,0.013898735485438043
+3644,RandomForest,10.0,12.00 < active_days <= 20.00,-0.01282167855374817
+3644,RandomForest,10.0,n_missed <= 0.00,-0.012224950386004133
+3644,RandomForest,10.0,clk_forumng <= 7.00,0.011074605856926009
+3644,RandomForest,10.0,region_Wales <= 0.00,-0.01044991379665145
+3644,RandomForest,10.0,imd_band_10-20 <= 0.00,-0.010240789228282645
+3644,RandomForest,10.0,imd_band_60-70% <= 0.00,0.009229559337171114
+3644,RandomForest,10.0,90.00 < clicks_last14 <= 202.00,-0.00909133541969786
+3644,RandomForest,10.0,imd_band_Unknown <= 0.00,0.009080866857658075
+818,RandomForest,10.0,min_score <= 73.00,0.030147652646593127
+818,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.02823632965107973
+818,RandomForest,10.0,last_score <= 73.00,0.027464207865506716
+818,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.02659063529019607
+818,RandomForest,10.0,mean_score <= 73.00,0.02615453179623624
+818,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.024902578164223105
+818,RandomForest,10.0,clk_sharedsubpage <= 0.00,-0.01715827134536497
+818,RandomForest,10.0,last_active_gap > 5.00,0.01713393541903459
+818,RandomForest,10.0,clk_homepage <= 19.00,0.014800695912561805
+818,RandomForest,10.0,clk_dualpane <= 0.00,0.014411018692278722
+818,RandomForest,10.0,6.00 < active_days <= 12.00,0.014294563070224814
+818,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.014279463458929553
+818,RandomForest,10.0,clk_ouwiki <= 6.00,0.014240091210398568
+818,RandomForest,10.0,imd_band_80-90% <= 0.00,0.013187134539102424
+818,RandomForest,10.0,region_Wales <= 0.00,-0.011535625664890605
+5372,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.03381237695934871
+5372,RandomForest,10.0,active_days <= 6.00,0.030727073837716008
+5372,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.02877045964537839
+5372,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.021975213270963103
+5372,RandomForest,10.0,clicks_total <= 80.00,0.021856445201752357
+5372,RandomForest,10.0,clk_dualpane <= 0.00,0.02086537515945447
+5372,RandomForest,10.0,last_active_gap > 5.00,0.01751551382227089
+5372,RandomForest,10.0,clk_homepage <= 19.00,0.01689439259622876
+5372,RandomForest,10.0,20.00 < clk_oucontent <= 78.00,0.016452202202563455
+5372,RandomForest,10.0,n_missed <= 0.00,-0.014520763003138572
+5372,RandomForest,10.0,clk_quiz <= 1.00,0.013479366607446128
+5372,RandomForest,10.0,mean_late <= 0.00,-0.012091274931478714
+5372,RandomForest,10.0,clicks_pre_start <= 3.00,0.011787025159310507
+5372,RandomForest,10.0,clk_dataplus <= 0.00,0.011602674839261522
+5372,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.010267866337588291
+4389,RandomForest,10.0,clk_htmlactivity > 0.00,-0.07621912879849409
+4389,RandomForest,10.0,active_days > 20.00,-0.03806349459131198
+4389,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.029359592470932734
+4389,RandomForest,10.0,min_score <= 73.00,0.028010910797762
+4389,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.027621275605909757
+4389,RandomForest,10.0,last_score <= 73.00,0.026431310796201767
+4389,RandomForest,10.0,mean_score <= 73.00,0.025155298221970986
+4389,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.023823609142475548
+4389,RandomForest,10.0,clicks_last14 > 202.00,-0.019861793064935174
+4389,RandomForest,10.0,clicks_total > 438.00,-0.016922066885798108
+4389,RandomForest,10.0,clk_dualpane <= 0.00,0.0164657438821362
+4389,RandomForest,10.0,clk_ouwiki > 6.00,-0.012656379103256003
+4389,RandomForest,10.0,70.00 < clicks_prev14 <= 166.00,-0.012115557662158358
+4389,RandomForest,10.0,region_Wales <= 0.00,-0.011162689664685928
+4389,RandomForest,10.0,code_module_AAA <= 0.00,0.010863899881642498
+4240,RandomForest,10.0,active_days > 20.00,-0.04483013512438085
+4240,RandomForest,10.0,min_score > 80.00,-0.031366726816585346
+4240,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.02629721675308703
+4240,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.02604867105078167
+4240,RandomForest,10.0,last_score > 80.00,-0.02459707279250899
+4240,RandomForest,10.0,mean_score > 80.00,-0.023906290059630946
+4240,RandomForest,10.0,clk_htmlactivity > 0.00,0.023388306513750907
+4240,RandomForest,10.0,clk_dataplus <= 0.00,0.02254521301113806
+4240,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.021413697441626918
+4240,RandomForest,10.0,clicks_last14 > 202.00,-0.021376195236494203
+4240,RandomForest,10.0,clicks_total > 438.00,-0.017665477150393374
+4240,RandomForest,10.0,clk_quiz > 55.00,-0.015194339639242415
+4240,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.014162290910414804
+4240,RandomForest,10.0,clk_dualpane <= 0.00,0.012379044250742401
+4240,RandomForest,10.0,imd_band_80-90% <= 0.00,0.010172105819226888
+685,RandomForest,10.0,active_days <= 6.00,0.0337151464209445
+685,RandomForest,10.0,min_score > 80.00,-0.029755500506306664
+685,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.02667925478539394
+685,RandomForest,10.0,last_score > 80.00,-0.025480558821151113
+685,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.02537717491820601
+685,RandomForest,10.0,mean_score > 80.00,-0.025265626262529203
+685,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.02489443032359038
+685,RandomForest,10.0,clicks_total <= 80.00,0.023376302696718733
+685,RandomForest,10.0,clicks_last14 <= 26.00,0.020920473469542532
+685,RandomForest,10.0,clk_dualpane <= 0.00,0.01830900078595759
+685,RandomForest,10.0,20.00 < clk_oucontent <= 78.00,0.015201134170885583
+685,RandomForest,10.0,age_band_55le_ <= 0.00,-0.014459157834761443
+685,RandomForest,10.0,clk_homepage <= 19.00,0.014202424193879562
+685,RandomForest,10.0,clk_externalquiz <= 3.00,-0.0119592638233481
+685,RandomForest,10.0,clk_dataplus <= 0.00,-0.005874693449753395
+612,RandomForest,10.0,min_score > 80.00,-0.029382750394431563
+612,RandomForest,10.0,last_score > 80.00,-0.02906785860445759
+612,RandomForest,10.0,mean_score > 80.00,-0.027187100312745602
+612,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.025441228540531994
+612,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.023623543357348665
+612,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.022655446896760304
+612,RandomForest,10.0,clk_dualpane <= 0.00,0.018776064318252024
+612,RandomForest,10.0,clk_sharedsubpage <= 0.00,-0.018672756043074976
+612,RandomForest,10.0,region_Wales <= 0.00,-0.01839150218763503
+612,RandomForest,10.0,clicks_total > 438.00,-0.018080438188414438
+612,RandomForest,10.0,clk_ouwiki <= 6.00,0.01497516209513986
+612,RandomForest,10.0,12.00 < active_days <= 20.00,-0.013259174268339785
+612,RandomForest,10.0,26.00 < clicks_last14 <= 90.00,0.012513592069742141
+612,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.011663000186981708
+612,RandomForest,10.0,clk_dataplus <= 0.00,0.01017451975130957
+3521,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.02787188158729772
+3521,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.023993066612849865
+3521,RandomForest,10.0,code_module_AAA <= 0.00,0.02273137223698777
+3521,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.022090022152423144
+3521,RandomForest,10.0,clk_dualpane <= 0.00,0.020648522851474126
+3521,RandomForest,10.0,clk_quiz > 55.00,-0.01755952704896324
+3521,RandomForest,10.0,6.00 < active_days <= 12.00,0.01556522626723327
+3521,RandomForest,10.0,imd_band_60-70% <= 0.00,0.014829970432118728
+3521,RandomForest,10.0,highest_education_No_Formal_quals <= 0.00,-0.013535886602822827
+3521,RandomForest,10.0,mean_late <= 0.00,-0.013226760267514886
+3521,RandomForest,10.0,90.00 < clicks_last14 <= 202.00,-0.011896963199974148
+3521,RandomForest,10.0,clk_ouwiki <= 6.00,0.010766552314441399
+3521,RandomForest,10.0,last_active_gap <= 0.00,-0.010535717102770702
+3521,RandomForest,10.0,clk_oucontent > 78.00,-0.010459289596495542
+3521,RandomForest,10.0,clk_resource <= 3.00,0.010133929326344038
+2642,RandomForest,10.0,num_of_prev_attempts > 0.00,0.02764566911164253
+2642,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.026406197125544636
+2642,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.026107659853463454
+2642,RandomForest,10.0,76.00 < last_score <= 80.00,-0.017865091510130056
+2642,RandomForest,10.0,highest_education_Post_Graduate_Qualification <= 0.00,0.017521003945461838
+2642,RandomForest,10.0,clk_ouwiki <= 6.00,0.016503201259004483
+2642,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.015362724494830247
+2642,RandomForest,10.0,76.00 < min_score <= 80.00,-0.012251858718372498
+2642,RandomForest,10.0,76.00 < mean_score <= 80.00,-0.011980508231859989
+2642,RandomForest,10.0,clk_dualpane <= 0.00,0.011814529338984666
+2642,RandomForest,10.0,12.00 < active_days <= 20.00,-0.011385898530265897
+2642,RandomForest,10.0,last_active_gap <= 0.00,-0.010787268768759531
+2642,RandomForest,10.0,clicks_per_active_day <= 12.33,-0.010537807834805337
+2642,RandomForest,10.0,region_North_Region <= 0.00,0.010389636574137818
+2642,RandomForest,10.0,region_West_Midlands_Region <= 0.00,0.01016164683902736
+1844,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.028280982488633605
+1844,RandomForest,10.0,min_score <= 73.00,0.028053883296438275
+1844,RandomForest,10.0,last_score <= 73.00,0.027910924086125468
+1844,RandomForest,10.0,mean_score <= 73.00,0.027623581008016228
+1844,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.025588027605520303
+1844,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.021596827073170285
+1844,RandomForest,10.0,clk_dualpane <= 0.00,0.019251630309892024
+1844,RandomForest,10.0,clk_homepage <= 19.00,0.01778390219147341
+1844,RandomForest,10.0,clk_ouwiki <= 6.00,0.01743560353314083
+1844,RandomForest,10.0,6.00 < active_days <= 12.00,0.016744843006784735
+1844,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.015410164808544928
+1844,RandomForest,10.0,90.00 < clicks_last14 <= 202.00,-0.014661374465731304
+1844,RandomForest,10.0,clk_quiz > 55.00,-0.014253181440706572
+1844,RandomForest,10.0,last_active_gap <= 0.00,-0.011882691538606115
+1844,RandomForest,10.0,clk_sharedsubpage <= 0.00,-0.010515268860395425
+606,RandomForest,10.0,active_days <= 6.00,0.030384049122357586
+606,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.02759307387902619
+606,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.025455717530876127
+606,RandomForest,10.0,clicks_last14 <= 26.00,0.024727634939107745
+606,RandomForest,10.0,clicks_total <= 80.00,0.02441199205080621
+606,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.02328000172191001
+606,RandomForest,10.0,clk_homepage <= 19.00,0.01620538619246259
+606,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.015071671285362473
+606,RandomForest,10.0,last_active_gap > 5.00,0.014086419119567364
+606,RandomForest,10.0,clk_quiz <= 1.00,0.013539538296495787
+606,RandomForest,10.0,clk_ouwiki <= 6.00,0.013191684597209615
+606,RandomForest,10.0,clk_resource <= 3.00,0.01167382313524199
+606,RandomForest,10.0,imd_band_90-100% <= 0.00,0.011382893245259108
+606,RandomForest,10.0,clicks_prev14 <= 17.00,0.010509802758415412
+606,RandomForest,10.0,clk_dataplus <= 0.00,0.008899164315864225
+1883,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.027936358488379595
+1883,RandomForest,10.0,min_score <= 73.00,0.02787339801065987
+1883,RandomForest,10.0,last_score <= 73.00,0.025091009220921192
+1883,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.022461687214787023
+1883,RandomForest,10.0,mean_score <= 73.00,0.021918611438478595
+1883,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.0212963293585119
+1883,RandomForest,10.0,clk_dualpane <= 0.00,0.016630281671368877
+1883,RandomForest,10.0,6.00 < active_days <= 12.00,0.015265431063982031
+1883,RandomForest,10.0,20.00 < clk_oucontent <= 78.00,0.014520154456569803
+1883,RandomForest,10.0,clk_dataplus <= 0.00,0.01438440934255273
+1883,RandomForest,10.0,clk_ouwiki <= 6.00,0.012161975414038005
+1883,RandomForest,10.0,last_active_gap <= 0.00,-0.010794118230614916
+1883,RandomForest,10.0,clk_sharedsubpage <= 0.00,0.010375696694055437
+1883,RandomForest,10.0,code_module_FFF <= 0.00,-0.01031520507525162
+1883,RandomForest,10.0,imd_band_10-20 <= 0.00,-0.009625156407647809
+4412,RandomForest,10.0,clk_htmlactivity > 0.00,0.09826440523331688
+4412,RandomForest,10.0,active_days <= 6.00,0.03678011778076177
+4412,RandomForest,10.0,clk_dataplus <= 0.00,0.03215603589848865
+4412,RandomForest,10.0,num_of_prev_attempts > 0.00,0.028710181927807398
+4412,RandomForest,10.0,clk_dualpane <= 0.00,0.02645122706859378
+4412,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.024957121732373067
+4412,RandomForest,10.0,clicks_total <= 80.00,0.02393219793176927
+4412,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.023179995100615778
+4412,RandomForest,10.0,clk_sharedsubpage <= 0.00,0.015338898123084588
+4412,RandomForest,10.0,clk_homepage <= 19.00,0.014996794289649864
+4412,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.012894528463390745
+4412,RandomForest,10.0,clicks_prev14 <= 17.00,0.01273493370860618
+4412,RandomForest,10.0,clk_ouwiki <= 6.00,0.012392814220518982
+4412,RandomForest,10.0,clk_quiz <= 1.00,0.011046228590919728
+4412,RandomForest,10.0,highest_education_Post_Graduate_Qualification <= 0.00,0.009768013169192036
+621,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.028225951459312174
+621,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.02730753977599085
+621,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.02610574231087595
+621,RandomForest,10.0,min_score <= 73.00,0.024752962574165066
+621,RandomForest,10.0,mean_score <= 73.00,0.02277476077017976
+621,RandomForest,10.0,last_score <= 73.00,0.022534047188630262
+621,RandomForest,10.0,clicks_last14 <= 26.00,0.020896890107749908
+621,RandomForest,10.0,region_Wales <= 0.00,-0.018029610089089206
+621,RandomForest,10.0,20.00 < clk_oucontent <= 78.00,0.01653355306335057
+621,RandomForest,10.0,6.00 < active_days <= 12.00,0.015854604725942693
+621,RandomForest,10.0,age_band_55le_ <= 0.00,0.015742335383988476
+621,RandomForest,10.0,code_module_AAA <= 0.00,0.015153545265175197
+621,RandomForest,10.0,clk_dualpane <= 0.00,0.014466437407628272
+621,RandomForest,10.0,clk_quiz <= 1.00,0.01265725093808832
+621,RandomForest,10.0,clk_homepage <= 19.00,0.01234753765821542
+4193,RandomForest,10.0,clk_htmlactivity > 0.00,-0.06701023647686856
+4193,RandomForest,10.0,active_days > 20.00,-0.044303091276833496
+4193,RandomForest,10.0,min_score > 80.00,-0.031875124300070806
+4193,RandomForest,10.0,last_score > 80.00,-0.027354372869782068
+4193,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.027054198623848197
+4193,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.024153869736778053
+4193,RandomForest,10.0,mean_score > 80.00,-0.023693092978794666
+4193,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.023545101409103927
+4193,RandomForest,10.0,clk_dualpane <= 0.00,0.01844844574662018
+4193,RandomForest,10.0,clicks_total > 438.00,-0.01661976831482661
+4193,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.014993210987495875
+4193,RandomForest,10.0,region_Wales <= 0.00,-0.013764585755250346
+4193,RandomForest,10.0,clk_ouwiki > 6.00,-0.013363882995376868
+4193,RandomForest,10.0,highest_education_Post_Graduate_Qualification <= 0.00,0.012818997132107098
+4193,RandomForest,10.0,imd_band_Unknown <= 0.00,0.011119174085417703
+4287,RandomForest,10.0,min_score > 80.00,-0.03299646026435844
+4287,RandomForest,10.0,last_score > 80.00,-0.028268092050079636
+4287,RandomForest,10.0,mean_score > 80.00,-0.02745778604996889
+4287,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.026833448679405007
+4287,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.023438487509417908
+4287,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.023402367815695196
+4287,RandomForest,10.0,clicks_last14 > 202.00,-0.019654242470055514
+4287,RandomForest,10.0,clicks_total > 438.00,-0.018098128674189744
+4287,RandomForest,10.0,clk_htmlactivity > 0.00,0.01679615917636916
+4287,RandomForest,10.0,clk_dualpane <= 0.00,0.01666470950189012
+4287,RandomForest,10.0,clk_quiz > 55.00,-0.014965672468063339
+4287,RandomForest,10.0,clk_ouwiki > 6.00,-0.0128971175304477
+4287,RandomForest,10.0,12.00 < active_days <= 20.00,-0.012714474067481675
+4287,RandomForest,10.0,highest_education_Post_Graduate_Qualification <= 0.00,-0.01270919242997727
+4287,RandomForest,10.0,region_North_Region <= 0.00,0.01112830531430236
+1855,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.03012014331134311
+1855,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.02992040354310074
+1855,RandomForest,10.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.020948776136155593
+1855,RandomForest,10.0,76.00 < min_score <= 80.00,-0.019509039175627053
+1855,RandomForest,10.0,code_module_AAA <= 0.00,0.014961445235387652
+1855,RandomForest,10.0,6.00 < active_days <= 12.00,0.01492761240891428
+1855,RandomForest,10.0,clk_quiz > 55.00,-0.01357981732175399
+1855,RandomForest,10.0,76.00 < last_score <= 80.00,-0.013251596998746954
+1855,RandomForest,10.0,26.00 < clicks_last14 <= 90.00,0.011625443032013448
+1855,RandomForest,10.0,region_Wales <= 0.00,-0.01145371906681697
+1855,RandomForest,10.0,clk_ouwiki <= 6.00,0.010574684450083627
+1855,RandomForest,10.0,clk_dualpane <= 0.00,0.010363565287955663
+1855,RandomForest,10.0,clk_oucontent <= 1.00,-0.01027237023202873
+1855,RandomForest,10.0,region_Ireland <= 0.00,0.010007866843724848
+1855,RandomForest,10.0,clk_sharedsubpage <= 0.00,0.009070233894668668
+3602,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.0284515409598937
+3602,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.023212316431565606
+3602,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.022607207647307167
+3602,RandomForest,10.0,clk_dualpane <= 0.00,0.022567759499638334
+3602,RandomForest,10.0,clk_quiz > 55.00,-0.018975204057757197
+3602,RandomForest,10.0,clk_questionnaire <= 0.00,0.01265487672140114
+3602,RandomForest,10.0,213.00 < clicks_total <= 438.00,-0.012103730719636037
+3602,RandomForest,10.0,90.00 < clicks_last14 <= 202.00,-0.011973333804239218
+3602,RandomForest,10.0,46.00 < clk_homepage <= 86.00,-0.011677223798941752
+3602,RandomForest,10.0,last_active_gap <= 0.00,-0.01166420472495296
+3602,RandomForest,10.0,imd_band_0-10% > 0.00,0.011660152277276232
+3602,RandomForest,10.0,clk_ouwiki <= 6.00,0.01076775343384314
+3602,RandomForest,10.0,70.00 < clicks_prev14 <= 166.00,-0.01004903688077334
+3602,RandomForest,10.0,studied_credits > 90.00,0.009261387604950173
+3602,RandomForest,10.0,0.00 < highest_education_A_Level_or_Equivalent <= 1.00,-0.00921313163369649
+2664,RandomForest,10.0,active_days > 20.00,-0.04069510881046013
+2664,RandomForest,10.0,min_score > 80.00,-0.032734644202069445
+2664,RandomForest,10.0,last_score > 80.00,-0.026666967759208845
+2664,RandomForest,10.0,num_of_prev_attempts <= 0.00,-0.023727877871804554
+2664,RandomForest,10.0,mean_score > 80.00,-0.02353167231785852
+2664,RandomForest,10.0,clk_ouelluminate <= 0.00,-0.0235007462654806
+2664,RandomForest,10.0,clk_dualpane <= 0.00,0.023142347729433844
+2664,RandomForest,10.0,highest_education_Lower_Than_A_Level <= 0.00,-0.022835327340578776
+2664,RandomForest,10.0,imd_band_80-90% <= 0.00,0.016550147578489202
+2664,RandomForest,10.0,age_band_55le_ <= 0.00,0.012950085615657532
+2664,RandomForest,10.0,213.00 < clicks_total <= 438.00,-0.012933177788840162
+2664,RandomForest,10.0,imd_band_0-10% <= 0.00,-0.011528463441518783
+2664,RandomForest,10.0,last_active_gap <= 0.00,-0.01132700580048576
+2664,RandomForest,10.0,imd_band_60-70% <= 0.00,0.010704489483513293
+2664,RandomForest,10.0,clk_dataplus <= 0.00,-0.008484415964472242
