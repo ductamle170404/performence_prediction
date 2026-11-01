@@ -20,6 +20,7 @@ from xgboost import XGBClassifier, XGBRegressor
 import features as F
 
 warnings.filterwarnings("ignore")
+TRAIN_PRES = ["2013B", "2013J", "2014B"]
 TEST_PRES = "2014J"
 CAT = ["code_module", "gender", "region", "highest_education", "imd_band",
        "age_band", "disability"]
@@ -54,13 +55,14 @@ def main():
     for cut in a.cutoffs:
         df = F.build(d, cut)
         is_test = df["code_presentation"] == TEST_PRES
+        is_train = df["code_presentation"].isin(TRAIN_PRES)
         X = make_xy(df)
-        Xtr, Xte = X[~is_test], X[is_test]
+        Xtr, Xte = X[is_train], X[is_test]
         print(f"\n=== cutoff = ngày {cut} | train {len(Xtr):,} | test {len(Xte):,} | "
-              f"{X.shape[1]} đặc trưng | tỉ lệ at-risk train {df.loc[~is_test,'at_risk'].mean():.2f}")
+              f"{X.shape[1]} đặc trưng | tỉ lệ at-risk train {df.loc[is_train,'at_risk'].mean():.2f}")
 
         # ---------- Classification: at_risk (Fail + Withdrawn) ----------
-        ytr, yte = df.loc[~is_test, "at_risk"], df.loc[is_test, "at_risk"]
+        ytr, yte = df.loc[is_train, "at_risk"], df.loc[is_test, "at_risk"]
         spw = (ytr == 0).sum() / max((ytr == 1).sum(), 1)
         clfs = {
             "XGBoost": XGBClassifier(n_estimators=400, max_depth=5, learning_rate=0.05, subsample=0.8,

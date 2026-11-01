@@ -25,6 +25,7 @@ from xgboost import XGBClassifier
 import features as F
 
 warnings.filterwarnings("ignore")
+TRAIN_PRES = ["2013B", "2013J", "2014B"]
 TEST_PRES = "2014J"
 CAT = ["code_module", "gender", "region", "highest_education", "imd_band", "age_band", "disability"]
 DROP = ["id_student", "code_presentation", "final_result", "at_risk", "fail_only", "final_score",
@@ -66,9 +67,10 @@ def main():
     for cut in a.cutoffs:
         df = F.build(d, cut)
         is_test = df["code_presentation"] == TEST_PRES
+        is_train = df["code_presentation"].isin(TRAIN_PRES)
         X = make_xy(df)
-        Xtr, Xte = X[~is_test], X[is_test]
-        ytr, yte = df.loc[~is_test, a.target], df.loc[is_test, a.target]
+        Xtr, Xte = X[is_train], X[is_test]
+        ytr, yte = df.loc[is_train, a.target], df.loc[is_test, a.target]
         mods_te = df.loc[is_test, "code_module"].values
         print(f"\n=== cutoff = ngày {cut} | train {len(Xtr):,} | test {len(Xte):,} | "
               f"{X.shape[1]} đặc trưng | tỉ lệ dương train {ytr.mean():.2f}, test {yte.mean():.2f}")
