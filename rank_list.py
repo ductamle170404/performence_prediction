@@ -1,8 +1,8 @@
 """Danh sách xếp hạng rủi ro cho cố vấn học tập + đánh giá độ chính xác khi đi xuống danh sách.
 
 Ví dụ:
-    python rank_list.py --data data --cutoff 60
-    python rank_list.py --data data --cutoff 30 --model rf --target fail_only
+    python rank_list.py --data data_using --cutoff 60
+    python rank_list.py --data data_using --cutoff 30 --model rf --target fail_only
 
 Giả lập triển khai thật: huấn luyện trên các đợt đã kết thúc (2013B, 2013J, 2014B),
 chấm điểm đợt "hiện tại" (2014J) tại ngày --cutoff. Nhãn thật của 2014J CHỈ dùng để đánh giá.

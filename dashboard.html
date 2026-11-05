@@ -3,125 +3,996 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Performance Prediction Dashboard</title>
+  <meta name="theme-color" content="#f5f7f5">
+  <title>Early Signal — Performance Prediction</title>
   <style>
     :root {
-      --bg: #f4f7fb; --card: #fff; --ink: #172033; --muted: #64748b;
-      --primary: #2563eb; --primary-light: #dbeafe; --line: #e5e7eb;
-      --green: #059669; --orange: #d97706; --shadow: 0 8px 24px #17203312;
+      color-scheme: light;
+      --page: #f5f7f5;
+      --surface: #fff;
+      --ink: #172b2a;
+      --muted: #71817e;
+      --line: #e4eae7;
+      --green: #187b69;
+      --green-dark: #10584e;
+      --green-pale: #e4f3ee;
+      --purple: #7866d6;
+      --orange: #d98b42;
+      --red: #c75858;
+      --shadow: 0 12px 32px #223a3210;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--ink);
-      font: 14px/1.5 Segoe UI, Arial, sans-serif; }
-    .wrap { max-width: 1320px; margin: auto; padding: 28px; }
-    header { display:flex; justify-content:space-between; gap:18px; align-items:flex-start;
-      margin-bottom:24px; }
-    h1 { margin:0 0 5px; font-size:30px; letter-spacing:-.5px; }
-    h2 { margin:0 0 16px; font-size:18px; }
-    .subtitle, .muted { color:var(--muted); }
-    .badge { background:var(--primary-light); color:var(--primary); border-radius:999px;
-      padding:7px 12px; white-space:nowrap; font-weight:600; }
-    .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:14px;
-      padding:20px; box-shadow:var(--shadow); }
-    .kpi-label { color:var(--muted); font-size:12px; text-transform:uppercase;
-      letter-spacing:.6px; }
-    .kpi-value { margin-top:5px; font-size:28px; font-weight:700; color:var(--primary); }
-    .layout { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin-bottom:18px; }
-    .table-wrap { overflow:auto; max-height:510px; }
-    table { width:100%; border-collapse:collapse; white-space:nowrap; }
-    th, td { padding:10px 11px; border-bottom:1px solid var(--line); text-align:right; }
-    th { position:sticky; top:0; background:#f8fafc; color:var(--muted); font-size:12px; }
-    th:first-child, td:first-child { text-align:left; }
-    tr:hover td { background:#f8fbff; }
-    .bar-row { display:grid; grid-template-columns:180px 1fr 55px; align-items:center;
-      gap:10px; margin:13px 0; }
-    .bar-label { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .bar { height:12px; background:var(--primary-light); border-radius:8px; overflow:hidden; }
-    .bar > i { display:block; height:100%; background:linear-gradient(90deg,#2563eb,#60a5fa);
-      border-radius:8px; }
-    select { border:1px solid var(--line); border-radius:8px; padding:8px 10px;
-      background:#fff; color:var(--ink); margin-bottom:12px; }
-    .empty { padding:35px; text-align:center; color:var(--muted); }
-    @media (max-width: 900px) { .grid, .layout { grid-template-columns:1fr 1fr; } }
-    @media (max-width: 620px) { .wrap { padding:16px; } header, .grid, .layout { display:block; }
-      .card { margin-bottom:16px; } .badge { display:inline-block; margin-top:12px; } }
+    body { margin: 0; background: var(--page); color: var(--ink); }
+    button, input, select { font: inherit; }
+    button, select { cursor: pointer; }
+    .shell { max-width: 1440px; margin: auto; padding: 28px 36px 56px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-bottom: 30px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 14px; color: white; background: var(--green); font-size: 19px; font-weight: 800; }
+    .brand-name { font-size: 17px; font-weight: 750; letter-spacing: -.3px; }
+    .brand-subtitle { margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .server-status { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); font-size: 12px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #35a27d; }
+    .nav { display: flex; gap: 7px; padding: 5px; width: fit-content; margin-bottom: 26px; border: 1px solid var(--line); border-radius: 13px; background: #ebefec; }
+    .nav button { border: 0; border-radius: 9px; padding: 10px 16px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 650; }
+    .nav button.active { background: white; color: var(--green-dark); box-shadow: 0 2px 6px #152b2210; }
+    .page { display: none; }
+    .page.active { display: block; }
+    .page-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin: 0 0 22px; }
+    .eyebrow { margin-bottom: 8px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(25px, 3vw, 34px); line-height: 1.2; letter-spacing: -1px; }
+    h2 { margin: 0; font-size: 16px; letter-spacing: -.2px; }
+    .intro { margin: 8px 0 0; max-width: 680px; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .cutoff-chip { display: flex; align-items: center; gap: 11px; padding: 11px 15px; border: 1px solid #d5e9e1; border-radius: 13px; background: var(--green-pale); color: var(--green-dark); }
+    .cutoff-chip strong { display: block; font-size: 20px; line-height: 1; }
+    .cutoff-chip span { display: block; margin-top: 4px; font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 18px; }
+    .kpi { min-height: 112px; padding: 19px 21px; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: var(--shadow); }
+    .kpi-label { color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .6px; text-transform: uppercase; }
+    .kpi-value { margin-top: 11px; color: var(--green-dark); font-size: 29px; font-weight: 750; letter-spacing: -.8px; }
+    .kpi-note { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .panel { border: 1px solid var(--line); border-radius: 15px; background: var(--surface); box-shadow: var(--shadow); }
+    .filters { display: grid; grid-template-columns: minmax(190px, 1.25fr) repeat(2, minmax(150px, .8fr)) minmax(190px, 1.2fr); gap: 13px; align-items: end; padding: 18px 20px; margin-bottom: 17px; }
+    .field label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 11px; font-weight: 700; }
+    .field select, .field input { width: 100%; min-height: 40px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 9px; outline: none; background: #fff; color: var(--ink); font-size: 12px; }
+    .field select:focus, .field input:focus { border-color: #75b5a4; box-shadow: 0 0 0 3px #187b6912; }
+    .source-note { margin: -4px 2px 15px; color: var(--muted); font-size: 11px; }
+    .viewer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin: 0 0 13px; }
+    .viewer-actions button { padding: 9px 12px; border: 1px solid #d5e9e1; border-radius: 9px; background: #fff; color: var(--green-dark); font-size: 11px; font-weight: 700; }
+    .viewer-actions button:hover, .viewer-actions button.active { border-color: var(--green); background: var(--green-pale); }
+    .viewer-actions .email-note { color: var(--muted); font-size: 10px; }
+    .list-mode { margin: 0 0 12px; padding: 10px 12px; border-radius: 9px; background: #f3f5fc; color: #5e5794; font-size: 11px; }
+    .module-stack { display: grid; gap: 14px; }
+    .module-card { overflow: hidden; }
+    .module-head { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 15px 19px; border-bottom: 1px solid var(--line); }
+    .module-title { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 750; }
+    .module-badge { display: inline-flex; min-width: 39px; justify-content: center; padding: 5px 8px; border-radius: 7px; background: var(--green-pale); color: var(--green-dark); font-size: 11px; font-weight: 800; }
+    .module-count { color: var(--muted); font-size: 11px; }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; white-space: nowrap; }
+    th, td { padding: 11px 17px; border-bottom: 1px solid #edf0ee; text-align: left; }
+    th { background: #fafcfb; color: var(--muted); font-size: 10px; font-weight: 750; letter-spacing: .45px; text-transform: uppercase; }
+    td { font-size: 12px; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #fbfdfc; }
+    .student-id { font-variant-numeric: tabular-nums; font-weight: 700; }
+    .risk-cell { min-width: 180px; }
+    .risk-line { display: flex; align-items: center; gap: 9px; }
+    .risk-track { width: 88px; height: 6px; overflow: hidden; border-radius: 9px; background: #edf0ee; }
+    .risk-track i { display: block; height: 100%; border-radius: inherit; background: var(--green); }
+    .risk-track i.medium { background: var(--orange); }
+    .risk-track i.high { background: var(--red); }
+    .risk-number { min-width: 42px; font-variant-numeric: tabular-nums; font-weight: 750; }
+    .risk-label { padding: 4px 7px; border-radius: 6px; background: #e8f4ef; color: #26715f; font-size: 10px; font-weight: 700; }
+    .risk-label.medium { background: #fcf1e4; color: #a76b2e; }
+    .risk-label.high { background: #f9e9e9; color: #b64c4c; }
+    .detail-button { padding: 7px 10px; border: 1px solid #dbe8e3; border-radius: 8px; background: white; color: var(--green-dark); font-size: 11px; font-weight: 700; }
+    .detail-button:hover { border-color: var(--green); background: #f5fbf8; }
+    .pagination { display: flex; justify-content: flex-end; align-items: center; gap: 10px; padding: 11px 17px; border-top: 1px solid #edf0ee; color: var(--muted); font-size: 11px; }
+    .pagination button { padding: 5px 9px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: var(--ink); }
+    .pagination button:disabled { cursor: default; opacity: .4; }
+    .empty { padding: 35px 20px; color: var(--muted); text-align: center; font-size: 13px; }
+    .analysis-filters { display: flex; flex-wrap: wrap; gap: 13px; align-items: end; margin: 0 0 16px; }
+    .analysis-filters .field { width: 190px; }
+    .analysis-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(300px, .85fr); gap: 16px; }
+    .panel-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 18px 20px 10px; }
+    .panel-subtitle { margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.5; }
+    .chart-wrap { padding: 8px 15px 16px; }
+    .chart-wrap svg { display: block; width: 100%; height: auto; overflow: visible; }
+    .legend { display: flex; flex-wrap: wrap; gap: 14px; padding: 0 20px 17px; color: var(--muted); font-size: 10px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 8px; height: 8px; border-radius: 50%; }
+    .comparison { margin-top: 16px; overflow: hidden; }
+    .comparison table th, .comparison table td { padding: 12px 14px; }
+    .model-name { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+    .model-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+    .corr-panel { margin-top: 16px; }
+    .corr-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; padding: 10px 18px 18px; }
+    .corr-item { padding: 14px; border: 1px solid var(--line); border-radius: 11px; background: #fbfcfb; }
+    .corr-label { color: var(--muted); font-size: 10px; font-weight: 700; }
+    .corr-value { margin-top: 5px; font-size: 23px; font-weight: 750; letter-spacing: -.6px; }
+    .corr-scale { height: 4px; margin-top: 10px; overflow: hidden; border-radius: 8px; background: #edf0ee; }
+    .corr-scale i { display: block; height: 100%; border-radius: inherit; background: var(--purple); }
+    .notice { margin: 15px 0 0; padding: 11px 13px; border-radius: 9px; background: #f5f4fc; color: #62589e; font-size: 11px; line-height: 1.55; }
+    .explanation-panel { margin-top: 16px; }
+    .explanation-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; padding: 0 20px 14px; }
+    .explanation-controls .field { width: 190px; }
+    .explanation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; padding: 0 18px 18px; }
+    .explanation-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; }
+    .explanation-card h3 { margin: 0; padding: 14px 15px 4px; font-size: 13px; }
+    .explanation-card .panel-subtitle { padding: 0 15px; }
+    .explanation-chart { padding: 8px 14px 14px; }
+    .explanation-row { display: grid; grid-template-columns: minmax(95px, 1fr) minmax(80px, 1.5fr) 48px; gap: 8px; align-items: center; margin: 9px 0; }
+    .explanation-feature { overflow: hidden; color: var(--ink); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+    .explanation-track { position: relative; height: 9px; overflow: hidden; border-radius: 7px; background: #edf0ee; }
+    .explanation-track i { display: block; height: 100%; border-radius: inherit; background: var(--purple); }
+    .explanation-track.signed { position: relative; overflow: visible; background: linear-gradient(90deg, transparent calc(50% - .5px), #cdd5d1 calc(50% - .5px), #cdd5d1 calc(50% + .5px), transparent calc(50% + .5px)); }
+    .explanation-track.signed i { position: absolute; top: 1px; height: 7px; border-radius: 4px; }
+    .explanation-track.signed i.positive { left: 50%; background: var(--red); }
+    .explanation-track.signed i.negative { right: 50%; background: var(--green); }
+    .explanation-value { color: var(--muted); font-size: 10px; font-variant-numeric: tabular-nums; text-align: right; }
+    .explanation-select { margin: 5px 14px 0; min-height: 35px; max-width: calc(100% - 28px); padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font-size: 11px; }
+    .explanation-empty { padding: 25px 14px; color: var(--muted); font-size: 11px; text-align: center; }
+    dialog { width: min(820px, calc(100% - 28px)); max-width: 820px; padding: 0; border: 1px solid var(--line); border-radius: 16px; color: var(--ink); box-shadow: 0 25px 90px #12231f38; }
+    dialog::backdrop { background: #14282370; backdrop-filter: blur(2px); }
+    .dialog-head { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; padding: 20px 22px; border-bottom: 1px solid var(--line); }
+    .dialog-head h2 { font-size: 18px; }
+    .dialog-subtitle { margin-top: 5px; color: var(--muted); font-size: 11px; }
+    .dialog-close { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 8px; background: white; font-size: 18px; }
+    .dialog-body { padding: 15px 17px 19px; }
+    .dialog-kpis { display: flex; flex-wrap: wrap; gap: 9px; margin: 0 5px 8px; }
+    .dialog-kpis span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 10px; }
+    .dialog-kpis strong { color: var(--ink); }
+    .error-banner { display: none; margin-bottom: 15px; padding: 12px 14px; border: 1px solid #efcbcb; border-radius: 10px; background: #fff6f6; color: #a84545; font-size: 12px; }
+    .update-banner { display: none; margin: 0 0 16px; padding: 12px 15px; border: 1px solid #cce5d8; border-radius: 10px; background: #edf8f2; color: #21634f; font-size: 12px; }
+    .update-banner strong { margin-right: 5px; }
+    @media (max-width: 960px) {
+      .shell { padding: 22px 20px 40px; }
+      .filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .analysis-layout { grid-template-columns: 1fr; }
+      .explanation-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .shell { padding: 16px 13px 32px; }
+      .topbar { margin-bottom: 21px; }
+      .brand-subtitle { display: none; }
+      .nav { width: 100%; }
+      .nav button { flex: 1; padding: 9px 8px; font-size: 11px; }
+      .page-heading { align-items: flex-start; flex-direction: column; }
+      .kpi-grid { grid-template-columns: 1fr; gap: 9px; }
+      .kpi { min-height: 88px; padding: 15px 17px; }
+      .kpi-value { margin-top: 6px; font-size: 25px; }
+      .filters { grid-template-columns: 1fr; padding: 15px; }
+      .analysis-filters .field { flex: 1; min-width: 145px; }
+      .corr-grid { grid-template-columns: 1fr; }
+      th, td { padding: 10px 12px; }
+      .module-head { padding: 13px 14px; }
+    }
   </style>
 </head>
 <body>
-<main class="wrap">
-  <header>
-    <div><h1>Performance Prediction</h1>
-      <div class="subtitle">Bảng điều khiển kết quả mô hình cảnh báo sớm</div></div>
-    <div class="badge" id="source"></div>
+<main class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">E</div>
+      <div><div class="brand-name">Early Signal</div><div class="brand-subtitle">Performance prediction workspace</div></div>
+    </div>
+    <div class="server-status"><i class="status-dot"></i><span id="status-text">Đang kết nối dữ liệu</span></div>
   </header>
-  <section class="grid" id="kpis"></section>
-  <section class="layout">
-    <div class="card"><h2>So sánh mô hình</h2><div class="table-wrap" id="model-table"></div></div>
-    <div class="card"><h2>AUC XGBoost theo môn</h2><div id="module-chart"></div></div>
+
+  <nav class="nav" aria-label="Chế độ dashboard">
+    <button class="active" type="button" data-page="viewer">Theo dõi sinh viên</button>
+    <button type="button" data-page="research">Phân tích mô hình</button>
+  </nav>
+
+  <div id="update-banner" class="update-banner" role="status" aria-live="polite"></div>
+  <div id="error-banner" class="error-banner" role="alert"></div>
+
+  <section class="page active" id="page-viewer">
+    <div class="page-heading">
+      <div>
+        <div class="eyebrow">Student risk overview</div>
+        <h1>Danh sách cảnh báo</h1>
+        <p class="intro">Theo dõi xác suất rớt của từng sinh viên tại mốc tiến độ đã chọn. Chọn một ID để xem diễn biến rủi ro qua các mốc học tập.</p>
+      </div>
+      <div class="cutoff-chip"><strong id="viewer-cutoff-label">50%</strong><span>Tiến độ học phần</span></div>
+    </div>
+    <div class="kpi-grid" id="viewer-kpis"></div>
+    <section class="panel filters" aria-label="Bộ lọc danh sách">
+      <div class="field"><label for="source-file">File kết quả đã import</label><select id="source-file"></select></div>
+      <div class="field"><label for="viewer-model">Mô hình dự đoán</label><select id="viewer-model"></select></div>
+      <div class="field"><label for="viewer-module">Môn học · code module</label><select id="viewer-module"></select></div>
+      <div class="field"><label for="viewer-progress">Mốc tiến độ</label><select id="viewer-progress"></select></div>
+      <div class="field"><label for="viewer-sort">Sắp xếp sinh viên</label><select id="viewer-sort">
+        <option value="risk-desc">Tỉ lệ rớt: cao → thấp</option>
+        <option value="risk-asc">Tỉ lệ rớt: thấp → cao</option>
+        <option value="id-asc">ID: tăng dần</option>
+        <option value="id-desc">ID: giảm dần</option>
+      </select></div>
+      <div class="field"><label for="student-search">Tìm ID sinh viên</label><input id="student-search" type="search" placeholder="Nhập mã ID..."></div>
+    </section>
+    <p class="source-note" id="source-note"></p>
+    <div class="viewer-actions" aria-label="Danh sách email cần gửi">
+      <button type="button" data-recipient-mode="top10">Danh sách gửi mail · Top 10% rủi ro</button>
+      <button type="button" data-recipient-mode="above80">Danh sách gửi mail · Rủi ro trên 80%</button>
+      <span class="email-note">Chỉ lọc và sắp xếp danh sách, chưa gửi email.</span>
+    </div>
+    <div class="list-mode" id="list-mode" hidden></div>
+    <div class="module-stack" id="module-list"></div>
   </section>
-  <section class="card"><h2>Feature importance</h2>
-    <select id="importance-select"></select><div id="importance-chart"></div>
+
+  <section class="page" id="page-research">
+    <div class="page-heading">
+      <div>
+        <div class="eyebrow">Research workspace</div>
+        <h1>So sánh hiệu năng mô hình</h1>
+        <p class="intro">Đối chiếu Logistic Regression, Random Forest và XGBoost theo tiến độ; xem chất lượng phân loại, độ hiệu chuẩn và mức tương quan giữa các xác suất dự đoán.</p>
+      </div>
+    </div>
+    <div class="analysis-filters">
+      <div class="field"><label for="research-module">Phạm vi học phần</label><select id="research-module"></select></div>
+      <div class="field"><label for="research-progress">Mốc tiến độ</label><select id="research-progress"></select></div>
+    </div>
+    <div class="kpi-grid" id="research-kpis"></div>
+    <div class="analysis-layout">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>ROC-AUC theo tiến độ</h2><div class="panel-subtitle" id="trend-subtitle"></div></div></div>
+        <div class="chart-wrap" id="trend-chart"></div>
+        <div class="legend" id="trend-legend"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><h2>So sánh tại mốc chọn</h2><div class="panel-subtitle" id="snapshot-subtitle"></div></div></div>
+        <div class="table-scroll" id="comparison-table"></div>
+      </section>
+    </div>
+    <section class="panel corr-panel">
+      <div class="panel-heading"><div><h2>Tương quan xác suất dự đoán</h2><div class="panel-subtitle">Pearson correlation trên cùng sinh viên và cùng mốc tiến độ; 1.00 nghĩa là hai mô hình xếp rủi ro gần như đồng nhất.</div></div></div>
+      <div class="corr-grid" id="correlation-grid"></div>
+    </section>
+    <section class="panel explanation-panel">
+      <div class="panel-heading"><div><h2>Giải thích dự đoán · SHAP &amp; LIME</h2><div class="panel-subtitle">SHAP tóm tắt mức ảnh hưởng toàn cục của đặc trưng; LIME giải thích các dự đoán riêng lẻ trong mẫu đã xuất.</div></div></div>
+      <div class="explanation-controls">
+        <div class="field"><label for="explanation-model">Mô hình giải thích</label><select id="explanation-model"></select></div>
+      </div>
+      <div class="explanation-grid">
+        <article class="explanation-card">
+          <h3>SHAP · Đặc trưng quan trọng</h3>
+          <div class="panel-subtitle">Trung bình trị tuyệt đối SHAP tại mốc đang chọn.</div>
+          <div class="explanation-chart" id="shap-chart"></div>
+        </article>
+        <article class="explanation-card">
+          <h3>LIME · Giải thích từng dự đoán</h3>
+          <div class="panel-subtitle" id="lime-subtitle">Chọn một mẫu LIME để xem các yếu tố tác động.</div>
+          <select class="explanation-select" id="lime-example" aria-label="Mẫu LIME"></select>
+          <div class="explanation-chart" id="lime-chart"></div>
+        </article>
+      </div>
+    </section>
+    <p class="notice">AUC/PR-AUC tổng thể lấy từ evaluation.csv. Khi chọn riêng một module, các chỉ số được tính lại trên predictions_all_models.csv; kết quả theo module mang tính mô tả trên tập dự đoán hiện có.</p>
   </section>
 </main>
+
+<dialog id="student-dialog">
+  <div class="dialog-head">
+    <div><h2 id="dialog-title">Diễn biến xác suất rớt</h2><div class="dialog-subtitle" id="dialog-subtitle"></div></div>
+    <button class="dialog-close" type="button" aria-label="Đóng" id="dialog-close">×</button>
+  </div>
+  <div class="dialog-body">
+    <div class="dialog-kpis" id="dialog-kpis"></div>
+    <div class="chart-wrap" id="student-chart"></div>
+  </div>
+</dialog>
+
 <script>
-const DATA = {"classification": [{"cutoff": 0, "model": "XGBoost", "auc": 0.7194654595267704, "pr_auc": 0.7005270733042485, "f1": 0.652385202816622, "recall": 0.6704035874439462, "precision": 0.6353100251110682, "accuracy": 0.6617774775644119, "recall_top10": 0.1732572360375051, "prec_top10": 0.8204633204633205, "recall_top30": 0.44863432531593966, "prec_top30": 0.7081724581724582}, {"cutoff": 0, "model": "RandomForest", "auc": 0.7129016531499539, "pr_auc": 0.6840811142841285, "f1": 0.6393359651786618, "recall": 0.6437015898899306, "precision": 0.6350291574502313, "accuracy": 0.6561806426710413, "recall_top10": 0.1681614349775785, "prec_top10": 0.7963320463320464, "recall_top30": 0.44455768446799837, "prec_top30": 0.7017374517374517}, {"cutoff": 0, "model": "LogReg(baseline)", "auc": 0.7206234399303572, "pr_auc": 0.6923371584676676, "f1": 0.6582701958083244, "recall": 0.6818181818181818, "precision": 0.6362944645234925, "accuracy": 0.664865386471099, "recall_top10": 0.16958825927435792, "prec_top10": 0.803088803088803, "recall_top30": 0.44659600489196905, "prec_top30": 0.704954954954955}, {"cutoff": 30, "model": "XGBoost", "auc": 0.7392440153132371, "pr_auc": 0.6360877704561752, "f1": 0.640476492206311, "recall": 0.6745862253069941, "precision": 0.6096501809408926, "accuracy": 0.6917309572965338, "recall_top10": 0.16684463427656165, "prec_top10": 0.6793478260869565, "recall_top30": 0.4938601174586225, "prec_top30": 0.6702898550724637}, {"cutoff": 30, "model": "RandomForest", "auc": 0.7465108711401991, "pr_auc": 0.6849610549676891, "f1": 0.621614301191766, "recall": 0.6126534970635344, "precision": 0.6308411214953271, "accuracy": 0.6964033467347605, "recall_top10": 0.21035771489588895, "prec_top10": 0.8565217391304348, "recall_top30": 0.48852108916177256, "prec_top30": 0.6630434782608695}, {"cutoff": 30, "model": "LogReg(baseline)", "auc": 0.7396533946269827, "pr_auc": 0.6627296427477043, "f1": 0.6278944534194938, "recall": 0.6225306994127069, "precision": 0.6333514394350896, "accuracy": 0.6996631533195697, "recall_top10": 0.18873465029364656, "prec_top10": 0.7684782608695652, "recall_top30": 0.4965296316070475, "prec_top30": 0.6739130434782609}, {"cutoff": 60, "model": "XGBoost", "auc": 0.789470130189902, "pr_auc": 0.7142433761893956, "f1": 0.6552431165787932, "recall": 0.6655757215114549, "precision": 0.6452264205364868, "accuracy": 0.7330460421864369, "recall_top10": 0.2267182386194585, "prec_top10": 0.8649262202043133, "recall_top30": 0.542100565307944, "prec_top30": 0.6888468809073724}, {"cutoff": 60, "model": "RandomForest", "auc": 0.7965351027919615, "pr_auc": 0.7412838608299982, "f1": 0.6572960440515867, "recall": 0.6747991669146087, "precision": 0.6406779661016949, "accuracy": 0.7317985937854389, "recall_top10": 0.24635525141326986, "prec_top10": 0.9398410896708286, "recall_top30": 0.5453734007735793, "prec_top30": 0.6930056710775048}, {"cutoff": 60, "model": "LogReg(baseline)", "auc": 0.7908644670346623, "pr_auc": 0.718656223037615, "f1": 0.6517964071856287, "recall": 0.6477238916988991, "precision": 0.6559204579692679, "accuracy": 0.7362213653889771, "recall_top10": 0.2356441535257364, "prec_top10": 0.8989784335981839, "recall_top30": 0.5447783397798275, "prec_top30": 0.692249527410208}, {"cutoff": 90, "model": "XGBoost", "auc": 0.8202159727082501, "pr_auc": 0.7549452109021227, "f1": 0.6762656758012077, "recall": 0.7100130039011704, "precision": 0.645580845403488, "accuracy": 0.7549513652877066, "recall_top10": 0.2662548764629389, "prec_top10": 0.9601406799531067, "recall_top30": 0.584850455136541, "prec_top30": 0.7030089878858929}, {"cutoff": 90, "model": "RandomForest", "auc": 0.8307928423973407, "pr_auc": 0.782026867675494, "f1": 0.6713615023474179, "recall": 0.697334200260078, "precision": 0.6472540736270368, "accuracy": 0.7538966365873667, "recall_top10": 0.2717815344603381, "prec_top10": 0.9800703399765534, "recall_top30": 0.5975292587776333, "prec_top30": 0.7182493161391168}, {"cutoff": 90, "model": "LogReg(baseline)", "auc": 0.8236988413731376, "pr_auc": 0.7597802256786829, "f1": 0.6759956942949408, "recall": 0.7145643693107933, "precision": 0.6413772979282171, "accuracy": 0.7530762920426579, "recall_top10": 0.26202860858257476, "prec_top10": 0.9449003516998827, "recall_top30": 0.5855006501950585, "prec_top30": 0.70379054318093}], "module": [{"cutoff": 0, "module": "AAA", "n": 352, "pos_rate": 0.28125, "auc": 0.6527328622190283}, {"cutoff": 0, "module": "BBB", "n": 2052, "pos_rate": 0.43859649122807015, "auc": 0.7058733603395062}, {"cutoff": 0, "module": "CCC", "n": 2285, "pos_rate": 0.5557986870897156, "auc": 0.6995903960280827}, {"cutoff": 0, "module": "DDD", "n": 1655, "pos_rate": 0.5214501510574018, "auc": 0.7202456195793392}, {"cutoff": 0, "module": "EEE", "n": 1121, "pos_rate": 0.3898305084745763, "auc": 0.7218307974360005}, {"cutoff": 0, "module": "FFF", "n": 2169, "pos_rate": 0.4850161364684186, "auc": 0.7358286726736132}, {"cutoff": 0, "module": "GGG", "n": 729, "pos_rate": 0.39094650205761317, "auc": 0.609526631895053}, {"cutoff": 30, "module": "AAA", "n": 348, "pos_rate": 0.27298850574712646, "auc": 0.6958394008737258}, {"cutoff": 30, "module": "BBB", "n": 1786, "pos_rate": 0.35498320268757, "auc": 0.6218057198562916}, {"cutoff": 30, "module": "CCC", "n": 2014, "pos_rate": 0.49602780536246277, "auc": 0.8005266350093936}, {"cutoff": 30, "module": "DDD", "n": 1463, "pos_rate": 0.45864661654135336, "auc": 0.7900916768278914}, {"cutoff": 30, "module": "EEE", "n": 1020, "pos_rate": 0.32941176470588235, "auc": 0.7895084934558619}, {"cutoff": 30, "module": "FFF", "n": 1857, "pos_rate": 0.3984921917070544, "auc": 0.7874773161702436}, {"cutoff": 30, "module": "GGG", "n": 715, "pos_rate": 0.37902097902097903, "auc": 0.6808782952694392}, {"cutoff": 60, "module": "AAA", "n": 340, "pos_rate": 0.25588235294117645, "auc": 0.74898914179274}, {"cutoff": 60, "module": "BBB", "n": 1741, "pos_rate": 0.3383113153360138, "auc": 0.7039370519713262}, {"cutoff": 60, "module": "CCC", "n": 1859, "pos_rate": 0.45400753093060786, "auc": 0.8366516470945298}, {"cutoff": 60, "module": "DDD", "n": 1407, "pos_rate": 0.43710021321961623, "auc": 0.8194608688511127}, {"cutoff": 60, "module": "EEE", "n": 996, "pos_rate": 0.3132530120481928, "auc": 0.8551647548358076}, {"cutoff": 60, "module": "FFF", "n": 1780, "pos_rate": 0.3724719101123595, "auc": 0.8499320119205316}, {"cutoff": 60, "module": "GGG", "n": 695, "pos_rate": 0.36115107913669064, "auc": 0.726562219590108}, {"cutoff": 90, "module": "AAA", "n": 335, "pos_rate": 0.24477611940298508, "auc": 0.8113371252289597}, {"cutoff": 90, "module": "BBB", "n": 1719, "pos_rate": 0.3298429319371728, "auc": 0.7379375489907897}, {"cutoff": 90, "module": "CCC", "n": 1768, "pos_rate": 0.4259049773755656, "auc": 0.8482693200923728}, {"cutoff": 90, "module": "DDD", "n": 1370, "pos_rate": 0.4218978102189781, "auc": 0.8501297577854672}, {"cutoff": 90, "module": "EEE", "n": 960, "pos_rate": 0.2875, "auc": 0.8529589371980676}, {"cutoff": 90, "module": "FFF", "n": 1708, "pos_rate": 0.34601873536299765, "auc": 0.8635000992203252}, {"cutoff": 90, "module": "GGG", "n": 673, "pos_rate": 0.34026745913818723, "auc": 0.8126499862307723}], "importance": {"importance_xgb_cutoff0": [{"feature": "highest_education_Lower_Than_A_Level", "importance": 0.035766065}, {"feature": "code_module_GGG", "importance": 0.023469111}, {"feature": "imd_band_0-10%", "importance": 0.022786573}, {"feature": "imd_band_90-100%", "importance": 0.022759335}, {"feature": "code_module_DDD", "importance": 0.021195384}, {"feature": "imd_band_10-20", "importance": 0.02094539}, {"feature": "click_trend", "importance": 0.020936191}, {"feature": "imd_band_Unknown", "importance": 0.020675816}, {"feature": "highest_education_No_Formal_quals", "importance": 0.01997926}, {"feature": "code_module_CCC", "importance": 0.01985574}, {"feature": "num_of_prev_attempts", "importance": 0.019524172}, {"feature": "disability_Y", "importance": 0.018144839}, {"feature": "clicks_pre_start", "importance": 0.017742809}, {"feature": "clicks_last14", "importance": 0.01769352}, {"feature": "region_South_Region", "importance": 0.01620432}, {"feature": "highest_education_A_Level_or_Equivalent", "importance": 0.016138194}, {"feature": "region_East_Midlands_Region", "importance": 0.01589606}, {"feature": "studied_credits", "importance": 0.015718179}, {"feature": "clicks_total", "importance": 0.015143467}, {"feature": "region_Wales", "importance": 0.014951922}], "importance_xgb_cutoff30": [{"feature": "n_due", "importance": 0.08930218}, {"feature": "n_missed", "importance": 0.049621515}, {"feature": "submit_rate", "importance": 0.047633953}, {"feature": "min_score", "importance": 0.044805728}, {"feature": "weight_due", "importance": 0.021696486}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.021550724}, {"feature": "mean_score", "importance": 0.016852105}, {"feature": "code_module_GGG", "importance": 0.016095597}, {"feature": "code_module_BBB", "importance": 0.015595704}, {"feature": "code_module_DDD", "importance": 0.015541224}, {"feature": "last_active_gap", "importance": 0.014808137}, {"feature": "clicks_prev14", "importance": 0.014101874}, {"feature": "imd_band_0-10%", "importance": 0.013919253}, {"feature": "highest_education_A_Level_or_Equivalent", "importance": 0.013803929}, {"feature": "active_days", "importance": 0.013654877}, {"feature": "code_module_AAA", "importance": 0.013254833}, {"feature": "clk_ouelluminate", "importance": 0.012589066}, {"feature": "num_of_prev_attempts", "importance": 0.012419101}, {"feature": "imd_band_90-100%", "importance": 0.011980664}, {"feature": "region_Scotland", "importance": 0.011875729}], "importance_xgb_cutoff60": [{"feature": "n_missed", "importance": 0.11539871}, {"feature": "submit_rate", "importance": 0.08129058}, {"feature": "mean_score", "importance": 0.03754558}, {"feature": "n_due", "importance": 0.02283266}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.019661153}, {"feature": "clicks_last7", "importance": 0.018309088}, {"feature": "last_active_gap", "importance": 0.01816276}, {"feature": "code_module_EEE", "importance": 0.017391061}, {"feature": "min_score", "importance": 0.0151857855}, {"feature": "num_of_prev_attempts", "importance": 0.014686581}, {"feature": "clk_ouelluminate", "importance": 0.013871842}, {"feature": "weight_due", "importance": 0.013606705}, {"feature": "code_module_CCC", "importance": 0.013331149}, {"feature": "code_module_AAA", "importance": 0.013306204}, {"feature": "imd_band_90-100%", "importance": 0.01274951}, {"feature": "mean_late", "importance": 0.012649063}, {"feature": "imd_band_10-20", "importance": 0.012250323}, {"feature": "age_band_55le_", "importance": 0.011873737}, {"feature": "region_East_Midlands_Region", "importance": 0.011774745}, {"feature": "region_Wales", "importance": 0.011743987}], "importance_xgb_cutoff90": [{"feature": "submit_rate", "importance": 0.15007575}, {"feature": "n_missed", "importance": 0.04377293}, {"feature": "mean_score", "importance": 0.032607947}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.018878326}, {"feature": "min_score", "importance": 0.018296735}, {"feature": "code_module_DDD", "importance": 0.017853828}, {"feature": "clicks_prev14", "importance": 0.01685363}, {"feature": "last_active_gap", "importance": 0.016794939}, {"feature": "num_of_prev_attempts", "importance": 0.016786052}, {"feature": "code_module_AAA", "importance": 0.015781857}, {"feature": "highest_education_A_Level_or_Equivalent", "importance": 0.0155468155}, {"feature": "imd_band_90-100%", "importance": 0.013708332}, {"feature": "region_East_Midlands_Region", "importance": 0.013653353}, {"feature": "clicks_last14", "importance": 0.013553557}, {"feature": "region_West_Midlands_Region", "importance": 0.012796033}, {"feature": "clicks_last7", "importance": 0.012091235}, {"feature": "n_due", "importance": 0.012077077}, {"feature": "last_score", "importance": 0.012018545}, {"feature": "weight_due", "importance": 0.011940683}, {"feature": "imd_band_Unknown", "importance": 0.011828553}], "importance_RandomForest_cutoff0": [{"feature": "date_registration", "importance": 0.06614694547583828}, {"feature": "clicks_last14", "importance": 0.05027893518420199}, {"feature": "clicks_total", "importance": 0.04937187016210113}, {"feature": "clicks_pre_start", "importance": 0.04805661480595901}, {"feature": "clicks_per_active_day", "importance": 0.04706731732306755}, {"feature": "click_trend", "importance": 0.045793248015986845}, {"feature": "clicks_last7", "importance": 0.04475859591215077}, {"feature": "clk_homepage", "importance": 0.04214365102644652}, {"feature": "n_sites", "importance": 0.0390260546490396}, {"feature": "clk_forumng", "importance": 0.03661524982887141}, {"feature": "clk_oucontent", "importance": 0.03614506095440784}, {"feature": "clk_subpage", "importance": 0.03324315597522267}, {"feature": "studied_credits", "importance": 0.030721981088330665}, {"feature": "clk_resource", "importance": 0.028903670194759798}, {"feature": "last_active_gap", "importance": 0.025656032393288286}, {"feature": "active_days", "importance": 0.024674045047224934}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.024445247243651543}, {"feature": "clk_url", "importance": 0.023727672636991975}, {"feature": "clicks_prev14", "importance": 0.022563701457470168}, {"feature": "num_of_prev_attempts", "importance": 0.013751588397361661}], "importance_RandomForest_cutoff30": [{"feature": "mean_score", "importance": 0.05125432277160545}, {"feature": "min_score", "importance": 0.04865443632522798}, {"feature": "last_score", "importance": 0.04649154523440916}, {"feature": "clicks_prev14", "importance": 0.04006655633864758}, {"feature": "clk_homepage", "importance": 0.03739310733853446}, {"feature": "clk_forumng", "importance": 0.037131015314246084}, {"feature": "clicks_total", "importance": 0.03668607274114824}, {"feature": "active_days", "importance": 0.03457260346385836}, {"feature": "clicks_last7", "importance": 0.03388022929764897}, {"feature": "date_registration", "importance": 0.03338901650208718}, {"feature": "last_active_gap", "importance": 0.03285851533634644}, {"feature": "clicks_last14", "importance": 0.03263477494136148}, {"feature": "click_trend", "importance": 0.032616572236715324}, {"feature": "clicks_per_active_day", "importance": 0.032577437492699285}, {"feature": "submit_rate", "importance": 0.032484908008850344}, {"feature": "n_missed", "importance": 0.03172137088310189}, {"feature": "clk_oucontent", "importance": 0.03060565117211595}, {"feature": "clicks_pre_start", "importance": 0.029904456964285443}, {"feature": "n_sites", "importance": 0.02933542959077727}, {"feature": "clk_subpage", "importance": 0.028532448397066562}], "importance_RandomForest_cutoff60": [{"feature": "mean_score", "importance": 0.0822066102466313}, {"feature": "min_score", "importance": 0.05537835626554083}, {"feature": "last_score", "importance": 0.05174363297783391}, {"feature": "n_missed", "importance": 0.049487873545207915}, {"feature": "clicks_last7", "importance": 0.047630844174266516}, {"feature": "submit_rate", "importance": 0.047433054486030156}, {"feature": "clicks_last14", "importance": 0.04135239651676099}, {"feature": "last_active_gap", "importance": 0.04130190757440118}, {"feature": "clicks_prev14", "importance": 0.03714571767576084}, {"feature": "clicks_total", "importance": 0.031001931997240655}, {"feature": "active_days", "importance": 0.0308438662574264}, {"feature": "clk_homepage", "importance": 0.030102601934694075}, {"feature": "clk_forumng", "importance": 0.028948023308610158}, {"feature": "clicks_per_active_day", "importance": 0.027043004649516585}, {"feature": "click_trend", "importance": 0.026368501629900322}, {"feature": "date_registration", "importance": 0.025624091745555255}, {"feature": "n_sites", "importance": 0.024393026294854007}, {"feature": "clk_oucontent", "importance": 0.024202495140816835}, {"feature": "clk_subpage", "importance": 0.02389623050915282}, {"feature": "clicks_pre_start", "importance": 0.022793841174691774}], "importance_RandomForest_cutoff90": [{"feature": "mean_score", "importance": 0.08404575447254024}, {"feature": "submit_rate", "importance": 0.07566161269642953}, {"feature": "min_score", "importance": 0.058757712951056966}, {"feature": "last_active_gap", "importance": 0.05531005385264125}, {"feature": "n_missed", "importance": 0.05482763364172912}, {"feature": "last_score", "importance": 0.05423613997268965}, {"feature": "clicks_last14", "importance": 0.047980995616195725}, {"feature": "clicks_last7", "importance": 0.043211683188831215}, {"feature": "clicks_prev14", "importance": 0.038269579855933454}, {"feature": "active_days", "importance": 0.028642093839813528}, {"feature": "clk_homepage", "importance": 0.02652537539833632}, {"feature": "clk_forumng", "importance": 0.026051005688593924}, {"feature": "clicks_total", "importance": 0.02586518221167618}, {"feature": "click_trend", "importance": 0.023605052326781152}, {"feature": "clicks_per_active_day", "importance": 0.02207031238165119}, {"feature": "n_sites", "importance": 0.02195901945783146}, {"feature": "clk_quiz", "importance": 0.021187675865432593}, {"feature": "clk_oucontent", "importance": 0.021031228288255783}, {"feature": "clk_subpage", "importance": 0.020777479150833243}, {"feature": "date_registration", "importance": 0.0204350371199843}], "importance_XGBoost_cutoff0": [{"feature": "highest_education_Lower_Than_A_Level", "importance": 0.06013248}, {"feature": "code_module_GGG", "importance": 0.04341443}, {"feature": "clicks_last14", "importance": 0.038751177}, {"feature": "imd_band_0-10%", "importance": 0.028585019}, {"feature": "num_of_prev_attempts", "importance": 0.027258456}, {"feature": "code_module_DDD", "importance": 0.026579496}, {"feature": "code_module_BBB", "importance": 0.025952877}, {"feature": "code_module_CCC", "importance": 0.02502783}, {"feature": "imd_band_Unknown", "importance": 0.022184495}, {"feature": "clicks_total", "importance": 0.022071078}, {"feature": "code_module_FFF", "importance": 0.019864067}, {"feature": "code_module_EEE", "importance": 0.019378608}, {"feature": "clicks_pre_start", "importance": 0.01894408}, {"feature": "imd_band_90-100%", "importance": 0.018463567}, {"feature": "imd_band_10-20", "importance": 0.01780853}, {"feature": "highest_education_No_Formal_quals", "importance": 0.016998518}, {"feature": "studied_credits", "importance": 0.016510589}, {"feature": "disability_N", "importance": 0.015740067}, {"feature": "imd_band_20-30%", "importance": 0.014691579}, {"feature": "imd_band_80-90%", "importance": 0.014473198}], "importance_XGBoost_cutoff30": [{"feature": "submit_rate", "importance": 0.26632467}, {"feature": "n_missed", "importance": 0.09636925}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.02365204}, {"feature": "mean_score", "importance": 0.023297412}, {"feature": "min_score", "importance": 0.021714704}, {"feature": "code_module_FFF", "importance": 0.020897131}, {"feature": "active_days", "importance": 0.01665973}, {"feature": "weight_due", "importance": 0.01596099}, {"feature": "code_module_AAA", "importance": 0.015228606}, {"feature": "code_module_EEE", "importance": 0.015202258}, {"feature": "gender_M", "importance": 0.015042681}, {"feature": "last_active_gap", "importance": 0.014822965}, {"feature": "clk_questionnaire", "importance": 0.01417082}, {"feature": "num_of_prev_attempts", "importance": 0.0140214}, {"feature": "code_module_BBB", "importance": 0.0136465775}, {"feature": "imd_band_0-10%", "importance": 0.013082109}, {"feature": "code_module_GGG", "importance": 0.010312536}, {"feature": "code_module_DDD", "importance": 0.009882446}, {"feature": "mean_late", "importance": 0.009699741}, {"feature": "clk_page", "importance": 0.009314523}], "importance_XGBoost_cutoff60": [{"feature": "submit_rate", "importance": 0.24554653}, {"feature": "n_missed", "importance": 0.10141048}, {"feature": "mean_score", "importance": 0.03760809}, {"feature": "code_module_CCC", "importance": 0.024740797}, {"feature": "code_module_AAA", "importance": 0.021454195}, {"feature": "last_active_gap", "importance": 0.020095484}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.019321859}, {"feature": "clicks_last7", "importance": 0.017718209}, {"feature": "min_score", "importance": 0.015421114}, {"feature": "weight_due", "importance": 0.013606864}, {"feature": "mean_late", "importance": 0.012152322}, {"feature": "last_score", "importance": 0.012036281}, {"feature": "code_module_FFF", "importance": 0.011374167}, {"feature": "code_module_BBB", "importance": 0.0113702845}, {"feature": "code_module_EEE", "importance": 0.010745979}, {"feature": "imd_band_0-10%", "importance": 0.010513085}, {"feature": "n_due", "importance": 0.010021891}, {"feature": "active_days", "importance": 0.009708902}, {"feature": "imd_band_Unknown", "importance": 0.009636239}, {"feature": "num_of_prev_attempts", "importance": 0.009486035}], "importance_XGBoost_cutoff90": [{"feature": "submit_rate", "importance": 0.3045145}, {"feature": "min_score", "importance": 0.035350632}, {"feature": "n_missed", "importance": 0.035265375}, {"feature": "mean_score", "importance": 0.027753206}, {"feature": "code_module_DDD", "importance": 0.021328527}, {"feature": "clicks_last14", "importance": 0.020526906}, {"feature": "highest_education_Lower_Than_A_Level", "importance": 0.016595196}, {"feature": "code_module_FFF", "importance": 0.016120996}, {"feature": "last_active_gap", "importance": 0.016073443}, {"feature": "code_module_AAA", "importance": 0.014241932}, {"feature": "clicks_last7", "importance": 0.014065536}, {"feature": "code_module_CCC", "importance": 0.013941501}, {"feature": "last_score", "importance": 0.013520152}, {"feature": "mean_late", "importance": 0.012279723}, {"feature": "num_of_prev_attempts", "importance": 0.011944638}, {"feature": "weight_due", "importance": 0.0111139845}, {"feature": "clicks_prev14", "importance": 0.011005225}, {"feature": "clk_page", "importance": 0.01020198}, {"feature": "n_due", "importance": 0.009304541}, {"feature": "imd_band_Unknown", "importance": 0.009274877}]}, "source": "results_cls\\classification_at_risk.csv"};
-const cls = DATA.classification || [], modules = DATA.module || [];
-const fmt = (v, digits=3) => typeof v === "number" ? v.toFixed(digits) : (v ?? "—");
-const pct = v => typeof v === "number" ? (v * 100).toFixed(1) + "%" : "—";
-const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-document.getElementById("source").textContent = DATA.source ? "Nguồn: " + DATA.source : "Chưa có kết quả";
+const MODEL_COLORS = {XGBoost: "#187b69", RandomForest: "#7866d6", LogisticRegression: "#d98b42"};
+const MODEL_LABELS = {XGBoost: "XGBoost", RandomForest: "Random Forest", LogisticRegression: "Logistic Regression"};
+const PAGE_SIZE = 25;
+const numberFormat = new Intl.NumberFormat("vi-VN");
+const percent = value => value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) ? `${(Number(value) * 100).toFixed(1)}%` : "—";
+const fixed = (value, digits = 3) => value !== null && value !== undefined && value !== "" && Number.isFinite(Number(value)) ? Number(value).toFixed(digits) : "—";
+const esc = value => String(value ?? "").replace(/[&<>"']/g, char => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"}[char]));
+const asNumber = value => {
+  if (value === null || value === undefined || value === "") return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+};
+let bootstrap = null;
+let predictions = [];
+let researchPredictions = [];
+let currentFile = "";
+let exportedMode = false;
+let recipientMode = null;
+let viewerPage = 1;
+let dataVersion = "";
+let refreshInProgress = false;
+let explanationData = null;
+let explanationRequestId = 0;
 
-function card(label, value) {
-  return `<div class="card"><div class="kpi-label">${label}</div><div class="kpi-value">${value}</div></div>`;
-}
-if (cls.length) {
-  const best = [...cls].sort((a,b) => (b.auc || 0) - (a.auc || 0))[0];
-  const avgRisk = cls.reduce((sum, row) => sum + (row.recall || 0), 0) / cls.length;
-  document.getElementById("kpis").innerHTML =
-    card("Số dòng đánh giá", cls.length) +
-    card("AUC tốt nhất", fmt(best.auc)) +
-    card("Mô hình nổi bật", esc(best.model)) +
-    card("Recall trung bình", pct(avgRisk));
-  const cols = ["cutoff","model","auc","pr_auc","f1","recall","precision","accuracy"];
-  let table = "<table><thead><tr>" + cols.map(c => `<th>${esc(c)}</th>`).join("") +
-    "</tr></thead><tbody>";
-  table += cls.map(row => "<tr>" + cols.map(c => `<td>${c === "model" ? esc(row[c]) :
-    c === "cutoff" ? "Ngày " + esc(row[c]) : fmt(row[c])}</td>`).join("") + "</tr>").join("");
-  document.getElementById("model-table").innerHTML = table + "</tbody></table>";
-} else {
-  document.getElementById("kpis").innerHTML =
-    '<div class="card empty" style="grid-column:1/-1">Chưa tìm thấy CSV kết quả. Hãy chạy train_cls.py trước.</div>';
-  document.getElementById("model-table").innerHTML = '<div class="empty">Chưa có dữ liệu.</div>';
+async function getJson(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+  return data;
 }
 
-function bars(container, rows, labelKey, valueKey, maxValue=1) {
-  if (!rows.length) { container.innerHTML = '<div class="empty">Chưa có dữ liệu.</div>'; return; }
-  container.innerHTML = rows.map(row => {
-    const value = Math.max(0, Number(row[valueKey]) || 0);
-    return `<div class="bar-row"><span class="bar-label">${esc(row[labelKey])}</span>
-      <span class="bar"><i style="width:${Math.min(value/maxValue*100,100)}%"></i></span>
-      <strong>${fmt(value)}</strong></div>`;
+function showError(message) {
+  const banner = document.getElementById("error-banner");
+  banner.textContent = message;
+  banner.style.display = "block";
+}
+
+function clearError() {
+  document.getElementById("error-banner").style.display = "none";
+}
+
+function option(value, label) {
+  return `<option value="${esc(value)}">${esc(label)}</option>`;
+}
+
+function initializeSelectors() {
+  const fileSelect = document.getElementById("source-file");
+  fileSelect.innerHTML = bootstrap.files.map(file => option(file, file)).join("");
+  fileSelect.value = bootstrap.files.includes("predictions_all_models.csv")
+    ? "predictions_all_models.csv" : (bootstrap.files[0] || "");
+  const modelOptions = bootstrap.models.map(model => option(model, MODEL_LABELS[model] || model)).join("");
+  document.getElementById("viewer-model").innerHTML = modelOptions;
+  document.getElementById("viewer-module").innerHTML =
+    bootstrap.modules.map(module => option(module, module)).join("");
+  if (bootstrap.modules.length) document.getElementById("viewer-module").value = bootstrap.modules[0];
+  document.getElementById("research-module").innerHTML =
+    option("all", "Tất cả module") + bootstrap.modules.map(module => option(module, module)).join("");
+  document.getElementById("research-progress").innerHTML =
+    bootstrap.progress.map(value => option(value, `Mốc ${value}%`)).join("");
+  document.getElementById("research-progress").value =
+    bootstrap.progress.includes(50) ? "50" : String(bootstrap.progress[0] ?? "");
+  const explanationModel = document.getElementById("explanation-model");
+  explanationModel.innerHTML = bootstrap.models
+    .map(model => option(model, MODEL_LABELS[model] || model)).join("");
+  if (exportedMode) {
+    fileSelect.value = "predictions_all_models.csv";
+    fileSelect.disabled = true;
+    document.getElementById("source-note").textContent =
+      "Bản HTML độc lập đang sử dụng dữ liệu đã nhúng từ predictions_all_models.csv.";
+  }
+}
+
+function updateProgressOptions(rows, preferredProgress) {
+  const progressSelect = document.getElementById("viewer-progress");
+  const values = [...new Set(rows.map(row => Number(row.progress_pct))
+    .filter(value => Number.isFinite(value)))].sort((a, b) => a - b);
+  progressSelect.innerHTML = values.map(value => option(value, `Mốc ${value}%`)).join("");
+  const preferred = Number(preferredProgress);
+  if (values.includes(preferred)) progressSelect.value = String(preferred);
+  else if (values.includes(50)) progressSelect.value = "50";
+  else if (values.length) progressSelect.value = String(values[0]);
+  document.getElementById("viewer-cutoff-label").textContent =
+    `${progressSelect.value || "—"}%`;
+}
+
+async function loadPredictions(fileName) {
+  clearError();
+  document.getElementById("module-list").innerHTML = '<div class="panel empty">Đang tải dữ liệu dự đoán…</div>';
+  try {
+    predictions = exportedMode
+      ? window.EXPORTED_DATA.predictions
+      : await getJson(`/api/predictions?file=${encodeURIComponent(fileName)}`);
+    currentFile = fileName;
+    recipientMode = null;
+    viewerPage = 1;
+    const availableModels = [...new Set(predictions.map(row => row.model))];
+    const modelSelect = document.getElementById("viewer-model");
+    const previousModel = modelSelect.value;
+    modelSelect.innerHTML = availableModels.map(model => option(model, MODEL_LABELS[model] || model)).join("");
+    if (availableModels.includes(previousModel)) modelSelect.value = previousModel;
+    else if (availableModels.length) modelSelect.value = availableModels[0];
+    const availableModules = [...new Set(predictions.map(row => row.code_module).filter(Boolean))].sort();
+    const moduleSelect = document.getElementById("viewer-module");
+    const previousModule = moduleSelect.value;
+    moduleSelect.innerHTML = availableModules.map(module => option(module, module)).join("");
+    if (availableModules.includes(previousModule)) moduleSelect.value = previousModule;
+    else if (availableModules.length) moduleSelect.value = availableModules[0];
+    updateProgressOptions(predictions, document.getElementById("viewer-progress").value || 50);
+    document.getElementById("source-note").textContent =
+      `${fileName} · ${numberFormat.format(predictions.length)} dòng dự đoán`;
+    document.getElementById("status-text").textContent = "Đã kết nối dữ liệu";
+    renderViewer();
+    renderResearch();
+  } catch (error) {
+    showError(`Không thể tải dữ liệu: ${error.message}`);
+    document.getElementById("module-list").innerHTML = "";
+    document.getElementById("status-text").textContent = "Lỗi dữ liệu";
+  }
+}
+
+function updateResearchSelectors() {
+  const moduleSelect = document.getElementById("research-module");
+  const selectedModule = moduleSelect.value;
+  moduleSelect.innerHTML =
+    option("all", "Tất cả module") + bootstrap.modules.map(module => option(module, module)).join("");
+  if ([...moduleSelect.options].some(item => item.value === selectedModule)) {
+    moduleSelect.value = selectedModule;
+  }
+  const progressSelect = document.getElementById("research-progress");
+  const selectedProgress = progressSelect.value;
+  progressSelect.innerHTML = bootstrap.progress
+    .map(value => option(value, `Mốc ${value}%`)).join("");
+  if ([...progressSelect.options].some(item => item.value === selectedProgress)) {
+    progressSelect.value = selectedProgress;
+  } else if (bootstrap.progress.includes(50)) {
+    progressSelect.value = "50";
+  } else if (bootstrap.progress.length) {
+    progressSelect.value = String(bootstrap.progress[0]);
+  }
+}
+
+async function refreshForNewData(nextBootstrap) {
+  const selectedFile = nextBootstrap.files.includes(currentFile)
+    ? currentFile
+    : (nextBootstrap.files.includes("predictions_all_models.csv")
+      ? "predictions_all_models.csv" : nextBootstrap.files[0]);
+  if (!selectedFile) throw new Error("Không tìm thấy file dự đoán mới.");
+  const [nextPredictions, nextResearchPredictions] = await Promise.all([
+    getJson(`/api/predictions?file=${encodeURIComponent(selectedFile)}`),
+    getJson("/api/predictions?file=predictions_all_models.csv")
+  ]);
+  const selectedProgress = document.getElementById("viewer-progress").value;
+  bootstrap = nextBootstrap;
+  predictions = nextPredictions;
+  researchPredictions = nextResearchPredictions;
+  currentFile = selectedFile;
+
+  const fileSelect = document.getElementById("source-file");
+  fileSelect.innerHTML = bootstrap.files.map(file => option(file, file)).join("");
+  fileSelect.value = selectedFile;
+  const availableModels = [...new Set(predictions.map(row => row.model))];
+  const modelSelect = document.getElementById("viewer-model");
+  const previousModel = modelSelect.value;
+  modelSelect.innerHTML = availableModels.map(model => option(model, MODEL_LABELS[model] || model)).join("");
+  if (availableModels.includes(previousModel)) modelSelect.value = previousModel;
+  else if (availableModels.length) modelSelect.value = availableModels[0];
+  const availableModules = [...new Set(predictions.map(row => row.code_module).filter(Boolean))].sort();
+  const moduleSelect = document.getElementById("viewer-module");
+  const previousModule = moduleSelect.value;
+  moduleSelect.innerHTML = availableModules.map(module => option(module, module)).join("");
+  if (availableModules.includes(previousModule)) moduleSelect.value = previousModule;
+  else if (availableModules.length) moduleSelect.value = availableModules[0];
+  updateProgressOptions(predictions, selectedProgress);
+  updateResearchSelectors();
+  updateExplanations();
+  viewerPage = 1;
+  document.getElementById("source-note").textContent =
+    `${currentFile} · ${numberFormat.format(predictions.length)} dòng dự đoán`;
+  document.getElementById("status-text").textContent = "Đã kết nối dữ liệu mới";
+  const banner = document.getElementById("update-banner");
+  const time = bootstrap.generated_at
+    ? new Date(bootstrap.generated_at).toLocaleString("vi-VN")
+    : "vừa cập nhật";
+  banner.innerHTML = `<strong>Đã có data mới!</strong> Kết quả từ predict_progress.py đã được tải lại (${esc(time)}).`;
+  banner.style.display = "block";
+  renderViewer();
+  renderResearch();
+}
+
+async function checkForNewData() {
+  if (exportedMode || refreshInProgress || !dataVersion) return;
+  refreshInProgress = true;
+  try {
+    const latest = await getJson("/api/bootstrap");
+    if (latest.data_version && latest.data_version !== dataVersion) {
+      await refreshForNewData(latest);
+      dataVersion = latest.data_version;
+    }
+  } catch (error) {
+    document.getElementById("status-text").textContent = `Lỗi kiểm tra cập nhật: ${error.message}`;
+  } finally {
+    refreshInProgress = false;
+  }
+}
+
+function riskLevel(value) {
+  if (value >= 0.6) return {name: "Cao", className: "high"};
+  if (value >= 0.3) return {name: "Theo dõi", className: "medium"};
+  return {name: "Thấp", className: ""};
+}
+
+function renderViewer() {
+  const model = document.getElementById("viewer-model").value || "XGBoost";
+  const selectedModule = document.getElementById("viewer-module").value;
+  const selectedProgress = Number(document.getElementById("viewer-progress").value);
+  document.getElementById("viewer-cutoff-label").textContent =
+    Number.isFinite(selectedProgress) ? `${selectedProgress}%` : "—";
+  const search = document.getElementById("student-search").value.trim().toLowerCase();
+  document.getElementById("viewer-sort").disabled = Boolean(recipientMode);
+  document.querySelectorAll("[data-recipient-mode]").forEach(button =>
+    button.classList.toggle("active", button.dataset.recipientMode === recipientMode)
+  );
+  const courseRows = predictions.filter(row =>
+    row.model === model && Number(row.progress_pct) === selectedProgress &&
+    row.code_module === selectedModule
+  );
+  let focusedRows = courseRows;
+  if (recipientMode === "top10") {
+    focusedRows = [...courseRows]
+      .sort((a, b) => Number(b.probability_fail) - Number(a.probability_fail))
+      .slice(0, Math.ceil(courseRows.length * 0.1));
+  } else if (recipientMode === "above80") {
+    focusedRows = courseRows.filter(row => Number(row.probability_fail) > 0.8);
+  }
+  const atFifty = focusedRows.filter(row =>
+    !search || String(row.id_student).toLowerCase().includes(search)
+  );
+  const sortMode = document.getElementById("viewer-sort").value;
+  atFifty.sort((a, b) => {
+    if (sortMode === "risk-asc") return Number(a.probability_fail) - Number(b.probability_fail);
+    if (sortMode === "id-asc") return String(a.id_student).localeCompare(String(b.id_student), undefined, {numeric: true});
+    if (sortMode === "id-desc") return String(b.id_student).localeCompare(String(a.id_student), undefined, {numeric: true});
+    return Number(b.probability_fail) - Number(a.probability_fail);
+  });
+  const highRisk = atFifty.filter(row => Number(row.probability_fail) >= 0.6).length;
+  const meanRisk = atFifty.length
+    ? atFifty.reduce((sum, row) => sum + Number(row.probability_fail), 0) / atFifty.length
+    : null;
+  document.getElementById("viewer-kpis").innerHTML = [
+    `<article class="kpi"><div class="kpi-label">Sinh viên · ${esc(selectedModule || "chưa chọn môn")}</div><div class="kpi-value">${numberFormat.format(atFifty.length)}</div><div class="kpi-note">Tại mốc ${esc(selectedProgress)}%, theo bộ lọc hiện tại</div></article>`,
+    `<article class="kpi"><div class="kpi-label">Rủi ro cao · từ 60%</div><div class="kpi-value">${numberFormat.format(highRisk)}</div><div class="kpi-note">Sinh viên cần ưu tiên theo dõi</div></article>`,
+    `<article class="kpi"><div class="kpi-label">Xác suất rớt trung bình</div><div class="kpi-value">${percent(meanRisk)}</div><div class="kpi-note">${esc(MODEL_LABELS[model] || model)} tại mốc ${esc(selectedProgress)}%</div></article>`
+  ].join("");
+
+  const modeNotice = document.getElementById("list-mode");
+  modeNotice.hidden = !recipientMode;
+  modeNotice.textContent = recipientMode === "top10"
+    ? `Danh sách ${esc(selectedModule)}: ${numberFormat.format(Math.ceil(courseRows.length * 0.1))} sinh viên thuộc top 10% có xác suất rớt cao nhất tại mốc ${esc(selectedProgress)}%. Danh sách được xếp từ cao xuống thấp; chưa gửi email.`
+    : recipientMode === "above80"
+      ? `Danh sách ${esc(selectedModule)}: ${numberFormat.format(courseRows.filter(row => Number(row.probability_fail) > 0.8).length)} sinh viên có xác suất rớt trên 80% tại mốc ${esc(selectedProgress)}%. Danh sách được xếp từ cao xuống thấp; chưa gửi email.`
+      : "";
+  const module = selectedModule;
+  if (!module) {
+    document.getElementById("module-list").innerHTML =
+      '<div class="panel empty">Chưa có môn học trong file kết quả đã chọn.</div>';
+    return;
+  }
+  if (!atFifty.length) {
+    document.getElementById("module-list").innerHTML =
+      '<div class="panel empty">Không có sinh viên phù hợp với môn học và bộ lọc hiện tại.</div>';
+    return;
+  }
+  const pageCount = Math.max(1, Math.ceil(atFifty.length / PAGE_SIZE));
+  viewerPage = Math.min(viewerPage, pageCount);
+  const shown = atFifty.slice((viewerPage - 1) * PAGE_SIZE, viewerPage * PAGE_SIZE);
+  const tableRows = shown.map(row => {
+      const risk = Number(row.probability_fail);
+      const level = riskLevel(risk);
+      return `<tr>
+        <td class="student-id">${esc(row.id_student)}</td>
+        <td>${esc(row.code_presentation)}</td>
+        <td class="risk-cell"><div class="risk-line"><span class="risk-track"><i class="${level.className}" style="width:${Math.max(0, Math.min(100, risk * 100))}%"></i></span><span class="risk-number">${percent(risk)}</span><span class="risk-label ${level.className}">${level.name}</span></div></td>
+        <td><button class="detail-button" type="button" data-detail="${esc(row.id_student)}" data-module="${esc(row.code_module)}" data-presentation="${esc(row.code_presentation)}" data-model="${esc(row.model)}">Xem biểu đồ ↗</button></td>
+      </tr>`;
+  }).join("");
+  document.getElementById("module-list").innerHTML = `<article class="panel module-card">
+    <div class="module-head"><div class="module-title"><span class="module-badge">${esc(module)}</span> Danh sách sinh viên</div><span class="module-count">${numberFormat.format(atFifty.length)} sinh viên</span></div>
+    <div class="table-scroll"><table><thead><tr><th>ID sinh viên</th><th>Kỳ học</th><th>Rủi ro rớt · ${esc(selectedProgress)}%</th><th>Chi tiết</th></tr></thead><tbody>${tableRows}</tbody></table></div>
+    ${pageCount > 1 ? `<div class="pagination"><span>Trang ${viewerPage}/${pageCount}</span><button type="button" data-viewer-page="${viewerPage - 1}" ${viewerPage <= 1 ? "disabled" : ""}>Trước</button><button type="button" data-viewer-page="${viewerPage + 1}" ${viewerPage >= pageCount ? "disabled" : ""}>Tiếp</button></div>` : ""}
+  </article>`;
+}
+
+function findEvaluation(model, progress) {
+  return bootstrap.evaluation.find(row =>
+    row.model === model && Number(row.progress_pct) === Number(progress)
+  );
+}
+
+function bucketRows(module, progress, model) {
+  return researchPredictions.filter(row =>
+    row.model === model && Number(row.progress_pct) === Number(progress) &&
+    (module === "all" || row.code_module === module)
+  );
+}
+
+function auc(rows) {
+  const sorted = rows.map(row => ({score: Number(row.probability_fail), actual: Number(row.actual_fail)}))
+    .filter(row => Number.isFinite(row.score) && (row.actual === 0 || row.actual === 1))
+    .sort((a, b) => a.score - b.score);
+  const positives = sorted.reduce((sum, row) => sum + row.actual, 0);
+  const negatives = sorted.length - positives;
+  if (!positives || !negatives) return null;
+  let positiveRankSum = 0;
+  for (let start = 0; start < sorted.length;) {
+    let end = start + 1;
+    while (end < sorted.length && sorted[end].score === sorted[start].score) end++;
+    const averageRank = ((start + 1) + end) / 2;
+    for (let index = start; index < end; index++) {
+      if (sorted[index].actual === 1) positiveRankSum += averageRank;
+    }
+    start = end;
+  }
+  return (positiveRankSum - positives * (positives + 1) / 2) / (positives * negatives);
+}
+
+function averagePrecision(rows) {
+  const sorted = rows.map(row => ({score: Number(row.probability_fail), actual: Number(row.actual_fail)}))
+    .filter(row => Number.isFinite(row.score) && (row.actual === 0 || row.actual === 1))
+    .sort((a, b) => b.score - a.score);
+  const positives = sorted.reduce((sum, row) => sum + row.actual, 0);
+  if (!positives) return null;
+  let seenPositives = 0;
+  let sumPrecision = 0;
+  sorted.forEach((row, index) => {
+    if (row.actual === 1) {
+      seenPositives++;
+      sumPrecision += seenPositives / (index + 1);
+    }
+  });
+  return sumPrecision / positives;
+}
+
+function calculateMetrics(rows) {
+  if (!rows.length) return {n: 0, auc: null, pr_auc: null, brier: null, recall: null, precision: null};
+  let positives = 0, truePositive = 0, falsePositive = 0, brierSum = 0;
+  const rankedRows = [];
+  for (const row of rows) {
+    const actual = Number(row.actual_fail);
+    const score = Number(row.probability_fail);
+    const threshold = Number(row.threshold);
+    if (actual === 1) positives++;
+    if (actual === 1 && score >= threshold) truePositive++;
+    if (actual === 0 && score >= threshold) falsePositive++;
+    brierSum += (score - actual) ** 2;
+    rankedRows.push({actual, score});
+  }
+  rankedRows.sort((a, b) => b.score - a.score);
+  const topK = {};
+  for (const fraction of [0.1, 0.3]) {
+    const count = Math.max(Math.ceil(rows.length * fraction), 1);
+    const selected = rankedRows.slice(0, count);
+    const selectedPositives = selected.reduce((sum, row) => sum + row.actual, 0);
+    const tag = Math.round(fraction * 100);
+    topK[`precision_top${tag}`] = selectedPositives / selected.length;
+    topK[`recall_top${tag}`] = positives ? selectedPositives / positives : null;
+  }
+  return {
+    n: rows.length,
+    auc: auc(rows),
+    pr_auc: averagePrecision(rows),
+    brier: brierSum / rows.length,
+    recall: positives ? truePositive / positives : null,
+    precision: truePositive + falsePositive ? truePositive / (truePositive + falsePositive) : null,
+    ...topK
+  };
+}
+
+function metricRows(module, progress) {
+  return bootstrap.models.map(model => {
+    if (module === "all") {
+      const evaluation = findEvaluation(model, progress);
+      if (evaluation) return {
+        model,
+        n: evaluation.n,
+        auc: evaluation.roc_auc,
+        pr_auc: evaluation.pr_auc,
+        brier: evaluation.brier,
+        recall: evaluation.recall_at_thr ?? evaluation.oof_recall_at_thr,
+        precision: evaluation.precision_at_thr,
+        precision_top10: evaluation.precision_top10,
+        recall_top10: evaluation.recall_top10,
+        precision_top30: evaluation.precision_top30,
+        recall_top30: evaluation.recall_top30
+      };
+    }
+    return {model, ...calculateMetrics(bucketRows(module, progress, model))};
+  });
+}
+
+function progressValues() {
+  return [...new Set(bootstrap.progress.map(Number))].sort((a, b) => a - b);
+}
+
+function trendMetrics(module) {
+  return bootstrap.models.map(model => ({
+    model,
+    values: progressValues().map(progress => {
+      if (module === "all") {
+        const row = findEvaluation(model, progress);
+        return {progress, value: row ? asNumber(row.roc_auc) : null};
+      }
+      const rows = bucketRows(module, progress, model);
+      return {progress, value: rows.length ? auc(rows) : null};
+    })
+  }));
+}
+
+function trendSvg(series) {
+  const width = 720, height = 270, left = 48, right = 18, top = 18, bottom = 38;
+  const values = progressValues();
+  const x = value => left + (values.length < 2 ? 0 : values.indexOf(value) / (values.length - 1)) * (width - left - right);
+  const y = value => top + (1 - (Math.max(0.4, Math.min(1, value)) - 0.4) / 0.6) * (height - top - bottom);
+  const grid = [0.5, 0.7, 0.9].map(value =>
+    `<g><line x1="${left}" y1="${y(value)}" x2="${width - right}" y2="${y(value)}" stroke="#e9eeeb" stroke-dasharray="4 5"/><text x="${left - 9}" y="${y(value) + 4}" fill="#899792" font-size="10" text-anchor="end">${value.toFixed(1)}</text></g>`
+  ).join("");
+  const xLabels = values.map(value =>
+    `<text x="${x(value)}" y="${height - 12}" fill="#899792" font-size="10" text-anchor="middle">${value}%</text>`
+  ).join("");
+  const lines = series.map(item => {
+    const points = item.values.filter(point => Number.isFinite(point.value));
+    if (!points.length) return "";
+    const path = points.map((point, index) => `${index ? "L" : "M"} ${x(point.progress)} ${y(point.value)}`).join(" ");
+    const color = MODEL_COLORS[item.model];
+    return `<path d="${path}" fill="none" stroke="${color}" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>` +
+      points.map(point => `<circle cx="${x(point.progress)}" cy="${y(point.value)}" r="4" fill="white" stroke="${color}" stroke-width="2.5"><title>${esc(item.model)} · ${point.progress}% · ${point.value.toFixed(3)}</title></circle>`).join("");
+  }).join("");
+  return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Biểu đồ ROC-AUC theo tiến độ">${grid}${xLabels}${lines}</svg>`;
+}
+
+function correlation(rowsByModel, first, second) {
+  const firstRows = new Map(rowsByModel.filter(row => row.model === first)
+    .map(row => [`${row.id_student}|${row.code_module}|${row.code_presentation}`, Number(row.probability_fail)]));
+  const pairs = rowsByModel.filter(row => row.model === second).flatMap(row => {
+    const key = `${row.id_student}|${row.code_module}|${row.code_presentation}`;
+    return firstRows.has(key) ? [[firstRows.get(key), Number(row.probability_fail)]] : [];
+  });
+  if (pairs.length < 2) return {value: null, n: pairs.length};
+  const meanX = pairs.reduce((sum, pair) => sum + pair[0], 0) / pairs.length;
+  const meanY = pairs.reduce((sum, pair) => sum + pair[1], 0) / pairs.length;
+  let numerator = 0, sumX = 0, sumY = 0;
+  for (const [x, y] of pairs) {
+    numerator += (x - meanX) * (y - meanY);
+    sumX += (x - meanX) ** 2;
+    sumY += (y - meanY) ** 2;
+  }
+  return {value: sumX && sumY ? numerator / Math.sqrt(sumX * sumY) : null, n: pairs.length};
+}
+
+function renderResearch() {
+  if (!bootstrap || !predictions.length) return;
+  const module = document.getElementById("research-module").value || "all";
+  const progress = Number(document.getElementById("research-progress").value);
+  const metrics = metricRows(module, progress);
+  const best = metrics.filter(row => Number.isFinite(asNumber(row.auc)))
+    .sort((a, b) => Number(b.auc) - Number(a.auc))[0];
+  const rowsAtProgress = bucketRows(module, progress, "XGBoost");
+  const avgBrier = metrics.map(row => asNumber(row.brier)).filter(value => value !== null);
+  document.getElementById("research-kpis").innerHTML = [
+    `<article class="kpi"><div class="kpi-label">ROC-AUC cao nhất</div><div class="kpi-value">${best ? fixed(best.auc) : "—"}</div><div class="kpi-note">${best ? esc(MODEL_LABELS[best.model]) : "Không đủ dữ liệu để tính"}</div></article>`,
+    `<article class="kpi"><div class="kpi-label">Sinh viên được đánh giá</div><div class="kpi-value">${numberFormat.format(metrics[0]?.n || rowsAtProgress.length)}</div><div class="kpi-note">${module === "all" ? "Toàn bộ tập đánh giá" : `Module ${esc(module)}`}</div></article>`,
+    `<article class="kpi"><div class="kpi-label">Brier score trung bình</div><div class="kpi-value">${avgBrier.length ? fixed(avgBrier.reduce((sum, value) => sum + value, 0) / avgBrier.length) : "—"}</div><div class="kpi-note">Thấp hơn thường cho xác suất hiệu chuẩn tốt hơn</div></article>`
+  ].join("");
+
+  const trend = trendMetrics(module);
+  document.getElementById("trend-subtitle").textContent =
+    module === "all" ? "So sánh ROC-AUC từ evaluation.csv ở các mốc dự đoán." : `ROC-AUC tính từ dự đoán của module ${module} tại từng mốc.`;
+  document.getElementById("trend-chart").innerHTML = trendSvg(trend);
+  document.getElementById("trend-legend").innerHTML = trend.map(item =>
+    `<span><i style="background:${MODEL_COLORS[item.model]}"></i>${esc(MODEL_LABELS[item.model])}</span>`
+  ).join("");
+
+  document.getElementById("snapshot-subtitle").textContent = `${module === "all" ? "Toàn bộ module" : `Module ${module}`} · mốc ${progress}%`;
+  const body = metrics.map(row => `<tr>
+    <td><span class="model-name"><i class="model-dot" style="background:${MODEL_COLORS[row.model]}"></i>${esc(MODEL_LABELS[row.model])}</span></td>
+    <td>${numberFormat.format(row.n || 0)}</td><td>${fixed(row.auc)}</td><td>${fixed(row.pr_auc)}</td><td>${fixed(row.brier)}</td><td>${percent(row.recall)}</td><td>${percent(row.precision)}</td><td>${percent(row.precision_top10)}</td><td>${percent(row.recall_top10)}</td><td>${percent(row.precision_top30)}</td><td>${percent(row.recall_top30)}</td>
+  </tr>`).join("");
+  document.getElementById("comparison-table").innerHTML = `<table><thead><tr><th>Mô hình</th><th>N</th><th>ROC-AUC</th><th>PR-AUC</th><th>Brier</th><th>Recall · threshold</th><th>Precision · threshold</th><th>Prec. Top 10%</th><th>Rec. Top 10%</th><th>Prec. Top 30%</th><th>Rec. Top 30%</th></tr></thead><tbody>${body}</tbody></table>`;
+
+  const selectedRows = researchPredictions.filter(row =>
+    Number(row.progress_pct) === progress && (module === "all" || row.code_module === module)
+  );
+  const pairs = [["XGBoost", "RandomForest"], ["XGBoost", "LogisticRegression"], ["RandomForest", "LogisticRegression"]];
+  document.getElementById("correlation-grid").innerHTML = pairs.map(([first, second]) => {
+    const result = correlation(selectedRows, first, second);
+    const amount = result.value === null ? 0 : Math.abs(result.value) * 100;
+    return `<article class="corr-item"><div class="corr-label">${esc(MODEL_LABELS[first])} × ${esc(MODEL_LABELS[second])}</div><div class="corr-value">${result.value === null ? "—" : result.value.toFixed(2)}</div><div class="corr-scale"><i style="width:${amount}%"></i></div><div class="panel-subtitle">n = ${numberFormat.format(result.n)} cặp so sánh</div></article>`;
   }).join("");
 }
-const moduleRows = modules.filter(r => r.module).sort((a,b) => (b.auc||0)-(a.auc||0));
-bars(document.getElementById("module-chart"), moduleRows, "module", "auc");
 
-const select = document.getElementById("importance-select");
-const importanceKeys = Object.keys(DATA.importance || {});
-if (!importanceKeys.length) {
-  select.remove(); document.getElementById("importance-chart").innerHTML =
-    '<div class="empty">Chưa có file feature importance.</div>';
-} else {
-  select.innerHTML = importanceKeys.map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join("");
-  function showImportance() {
-    const rows = (DATA.importance[select.value] || []).slice(0, 20)
-      .sort((a,b) => (b.importance||0)-(a.importance||0));
-    bars(document.getElementById("importance-chart"), rows, "feature", "importance",
-      Math.max(...rows.map(r => Number(r.importance)||0), 1));
+function renderShap() {
+  const container = document.getElementById("shap-chart");
+  const rows = [...(explanationData?.shap || [])]
+    .filter(row => asNumber(row.mean_abs_shap) !== null)
+    .sort((a, b) => Number(b.mean_abs_shap) - Number(a.mean_abs_shap))
+    .slice(0, 15);
+  if (!explanationData?.shap_available || !rows.length) {
+    container.innerHTML = '<div class="explanation-empty">Chưa có dữ liệu SHAP cho mô hình và mốc này. Hãy chạy predict_progress.py và bật SHAP.</div>';
+    return;
   }
-  select.addEventListener("change", showImportance); showImportance();
+  const max = Math.max(...rows.map(row => Number(row.mean_abs_shap)), Number.EPSILON);
+  container.innerHTML = rows.map(row => {
+    const value = Number(row.mean_abs_shap);
+    return `<div class="explanation-row"><span class="explanation-feature" title="${esc(row.feature)}">${esc(row.feature)}</span><span class="explanation-track"><i style="width:${value / max * 100}%"></i></span><span class="explanation-value">${value.toFixed(3)}</span></div>`;
+  }).join("");
 }
+
+function limeGroups() {
+  const groups = new Map();
+  for (const row of explanationData?.lime || []) {
+    const key = String(row.test_row_index);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(row);
+  }
+  return groups;
+}
+
+function renderLime() {
+  const select = document.getElementById("lime-example");
+  const container = document.getElementById("lime-chart");
+  const groups = limeGroups();
+  const selected = select.value;
+  const choices = [...groups.entries()];
+  select.innerHTML = choices.map(([key, rows], index) => {
+    const first = rows[0];
+    const identity = first.id_student
+      ? `ID ${first.id_student} · ${first.code_module || ""} ${first.code_presentation || ""}`
+      : `Mẫu ${index + 1} · dòng ${key}`;
+    return option(key, identity);
+  }).join("");
+  if (choices.some(([key]) => key === selected)) select.value = selected;
+  if (!explanationData?.lime_available || !choices.length) {
+    select.disabled = true;
+    document.getElementById("lime-subtitle").textContent =
+      "Chưa có mẫu LIME tại mô hình và mốc đang chọn.";
+    container.innerHTML = '<div class="explanation-empty">Hãy chạy predict_progress.py với LIME được bật để tạo giải thích cục bộ.</div>';
+    return;
+  }
+  select.disabled = false;
+  const selectedKey = select.value || choices[0][0];
+  select.value = selectedKey;
+  const rows = (groups.get(selectedKey) || []).slice()
+    .sort((a, b) => Math.abs(Number(b.lime_weight)) - Math.abs(Number(a.lime_weight)))
+    .slice(0, 15);
+  const first = rows[0] || {};
+  const identity = first.id_student
+    ? `Sinh viên ${first.id_student} · ${first.code_module || ""} ${first.code_presentation || ""}`
+    : `Mẫu giải thích tại dòng ${selectedKey}`;
+  const prediction = first.id_student ? researchPredictions.find(row =>
+    String(row.id_student) === String(first.id_student) &&
+    row.code_module === first.code_module &&
+    row.code_presentation === first.code_presentation &&
+    row.model === explanationData.model &&
+    Number(row.progress_pct) === Number(explanationData.progress)
+  ) : null;
+  const risk = prediction ? ` · Xác suất rớt ${percent(prediction.probability_fail)}` : "";
+  document.getElementById("lime-subtitle").textContent =
+    `${identity}${risk}. Đỏ làm tăng xu hướng dự đoán rớt; xanh làm giảm xu hướng.`;
+  const max = Math.max(...rows.map(row => Math.abs(Number(row.lime_weight)) || 0), Number.EPSILON);
+  container.innerHTML = rows.map(row => {
+    const value = Number(row.lime_weight);
+    const width = Math.abs(value) / max * 50;
+    const direction = value >= 0 ? "positive" : "negative";
+    return `<div class="explanation-row"><span class="explanation-feature" title="${esc(row.lime_feature)}">${esc(row.lime_feature)}</span><span class="explanation-track signed"><i class="${direction}" style="width:${width}%"></i></span><span class="explanation-value">${value >= 0 ? "+" : ""}${value.toFixed(3)}</span></div>`;
+  }).join("");
+}
+
+async function updateExplanations() {
+  const requestId = ++explanationRequestId;
+  const model = document.getElementById("explanation-model").value;
+  const progress = Number(document.getElementById("research-progress").value);
+  if (!model || !Number.isFinite(progress)) return;
+  document.getElementById("shap-chart").innerHTML =
+    '<div class="explanation-empty">Đang tải dữ liệu giải thích…</div>';
+  document.getElementById("lime-chart").innerHTML =
+    '<div class="explanation-empty">Đang tải dữ liệu giải thích…</div>';
+  try {
+    const key = `${model}|${progress}`;
+    explanationData = exportedMode
+      ? (window.EXPORTED_DATA.explanations?.[key] || {
+          model, progress, shap: [], lime: [], shap_available: false, lime_available: false
+        })
+      : await getJson(`/api/explanations?model=${encodeURIComponent(model)}&progress=${encodeURIComponent(progress)}`);
+    if (requestId !== explanationRequestId) return;
+    renderShap();
+    renderLime();
+  } catch (error) {
+    if (requestId !== explanationRequestId) return;
+    document.getElementById("shap-chart").innerHTML =
+      `<div class="explanation-empty">Không tải được SHAP: ${esc(error.message)}</div>`;
+    document.getElementById("lime-chart").innerHTML =
+      `<div class="explanation-empty">Không tải được LIME: ${esc(error.message)}</div>`;
+  }
+}
+
+function probabilityChart(rows) {
+  const width = 720, height = 280, left = 48, right = 18, top = 18, bottom = 44;
+  const sorted = [...rows].sort((a, b) => Number(a.progress_pct) - Number(b.progress_pct));
+  const x = value => left + (sorted.length < 2 ? 0 : sorted.findIndex(row => Number(row.progress_pct) === Number(value)) / (sorted.length - 1)) * (width - left - right);
+  const y = value => top + (1 - value) * (height - top - bottom);
+  const grid = [0, .25, .5, .75, 1].map(value =>
+    `<g><line x1="${left}" y1="${y(value)}" x2="${width - right}" y2="${y(value)}" stroke="#e9eeeb" stroke-dasharray="4 5"/><text x="${left - 9}" y="${y(value) + 4}" fill="#899792" font-size="10" text-anchor="end">${Math.round(value * 100)}%</text></g>`
+  ).join("");
+  const path = sorted.map((row, index) =>
+    `${index ? "L" : "M"} ${x(row.progress_pct)} ${y(Number(row.probability_fail))}`
+  ).join(" ");
+  const points = sorted.map(row => {
+    const value = Number(row.probability_fail);
+    return `<g><circle cx="${x(row.progress_pct)}" cy="${y(value)}" r="5" fill="#187b69" stroke="white" stroke-width="2"/><text x="${x(row.progress_pct)}" y="${height - 17}" fill="#71817e" font-size="10" text-anchor="middle">${Number(row.progress_pct)}%</text><title>Mốc ${Number(row.progress_pct)}%: ${percent(value)}</title></g>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Xác suất rớt theo tiến độ">${grid}<path d="${path}" fill="none" stroke="#187b69" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${points}</svg>`;
+}
+
+function showStudent(studentId, module, presentation, model) {
+  const rows = predictions.filter(row =>
+    String(row.id_student) === studentId && row.code_module === module &&
+    row.code_presentation === presentation && row.model === model
+  ).sort((a, b) => Number(a.progress_pct) - Number(b.progress_pct));
+  if (!rows.length) {
+    showError("Không tìm thấy các mốc dự đoán của sinh viên này trong file hiện tại.");
+    return;
+  }
+  const selectedProgress = Number(document.getElementById("viewer-progress").value);
+  const current = rows.find(row => Number(row.progress_pct) === selectedProgress);
+  document.getElementById("dialog-title").textContent = `Sinh viên ${studentId}`;
+  document.getElementById("dialog-subtitle").textContent =
+    `${module} · ${presentation} · ${MODEL_LABELS[model] || model}`;
+  document.getElementById("dialog-kpis").innerHTML =
+    `<span>Mốc ${esc(selectedProgress)}% đang chọn: <strong>${current ? percent(current.probability_fail) : "Chưa có dữ liệu"}</strong></span>` +
+    `<span>Số mốc: <strong>${rows.length}</strong></span>` +
+    `<span>Kết quả cuối kỳ: <strong>${esc(rows[0].final_result || "—")}</strong></span>`;
+  document.getElementById("student-chart").innerHTML = probabilityChart(rows);
+  document.getElementById("student-dialog").showModal();
+}
+
+document.querySelectorAll(".nav button").forEach(button => button.addEventListener("click", () => {
+  document.querySelectorAll(".nav button").forEach(item => item.classList.toggle("active", item === button));
+  document.querySelectorAll(".page").forEach(page => page.classList.toggle("active", page.id === `page-${button.dataset.page}`));
+  if (button.dataset.page === "research") renderResearch();
+}));
+document.getElementById("source-file").addEventListener("change", event => loadPredictions(event.target.value));
+document.getElementById("viewer-model").addEventListener("change", renderViewer);
+document.getElementById("viewer-module").addEventListener("change", () => { viewerPage = 1; recipientMode = null; renderViewer(); });
+document.getElementById("viewer-progress").addEventListener("change", () => {
+  viewerPage = 1;
+  recipientMode = null;
+  document.querySelectorAll("[data-recipient-mode]").forEach(button => button.classList.remove("active"));
+  renderViewer();
+});
+document.getElementById("viewer-sort").addEventListener("change", () => { viewerPage = 1; renderViewer(); });
+document.getElementById("student-search").addEventListener("input", () => { viewerPage = 1; renderViewer(); });
+document.getElementById("research-module").addEventListener("change", renderResearch);
+document.getElementById("research-progress").addEventListener("change", () => {
+  renderResearch();
+  updateExplanations();
+});
+document.getElementById("explanation-model").addEventListener("change", updateExplanations);
+document.getElementById("lime-example").addEventListener("change", renderLime);
+document.getElementById("module-list").addEventListener("click", event => {
+  const detail = event.target.closest("[data-detail]");
+  if (detail) return showStudent(detail.dataset.detail, detail.dataset.module, detail.dataset.presentation, detail.dataset.model);
+  const pagination = event.target.closest("[data-viewer-page]");
+  if (pagination && !pagination.disabled) {
+    viewerPage = Number(pagination.dataset.viewerPage);
+    renderViewer();
+  }
+});
+document.querySelectorAll("[data-recipient-mode]").forEach(button => button.addEventListener("click", () => {
+  recipientMode = recipientMode === button.dataset.recipientMode ? null : button.dataset.recipientMode;
+  viewerPage = 1;
+  if (recipientMode) document.getElementById("viewer-sort").value = "risk-desc";
+  document.querySelectorAll("[data-recipient-mode]").forEach(item =>
+    item.classList.toggle("active", item.dataset.recipientMode === recipientMode)
+  );
+  renderViewer();
+}));
+document.getElementById("dialog-close").addEventListener("click", () => document.getElementById("student-dialog").close());
+document.getElementById("student-dialog").addEventListener("click", event => {
+  if (event.target === event.currentTarget) event.currentTarget.close();
+});
+
+async function start() {
+  try {
+    exportedMode = Boolean(window.EXPORTED_DATA);
+    bootstrap = exportedMode ? window.EXPORTED_DATA.bootstrap : await getJson("/api/bootstrap");
+    dataVersion = bootstrap.data_version || "";
+    initializeSelectors();
+    researchPredictions = exportedMode
+      ? window.EXPORTED_DATA.predictions
+      : await getJson("/api/predictions?file=predictions_all_models.csv");
+    await loadPredictions(document.getElementById("source-file").value);
+    updateExplanations();
+    if (!exportedMode) window.setInterval(checkForNewData, 5000);
+  } catch (error) {
+    showError(`Không khởi tạo được dashboard: ${error.message}`);
+    document.getElementById("status-text").textContent = "Lỗi kết nối";
+  }
+}
+start();
 </script>
 </body>
 </html>

@@ -1,0 +1,34 @@
+
+Bình Phan Thị Thanh
+16:17
+A novel AI-driven model for student dropout risk analysis with explainable
+AI insights
+https://doi.org/10.1016/j.caeai.2024.100352
+
+TUẤN BÙI CÔNG
+16:24
+https://www.scimagojr.com/
+https://portal.core.edu.au/conf-ranks/
+
+TUẤN BÙI CÔNG
+16:35
+RAGAS
+
+Bình Phan Thị Thanh
+16:36
+Ghanvatkar, S., & Rajan, V. (2024). Evaluating explanations from AI algorithms for clinical decision-making: A social science-based approach. IEEE Journal of Biomedical and Health Informatics, 28(7), 4269–4280.  10.1109/JBHI.2024.3393719
+
+TUẤN BÙI CÔNG
+16:38
+RAGAs: Automated Evaluation of Retrieval Augmented Generation
+
+TUẤN BÙI CÔNG
+16:42
+https://aclanthology.org/2026.loreslm-1.15.pdf
+
+TUẤN BÙI CÔNG
+16:48
+Fact: (F)  dieu kien  ⇒ answer A
+Foil:  alt Fact →  (F1, F2, F3)
+
+So F vs F1, F2, F3 ⇒ giong nhau.

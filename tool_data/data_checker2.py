@@ -2,7 +2,7 @@ import pandas as pd
 
 names = ["courses","assessments","vle","studentInfo",
          "studentRegistration","studentAssessment","studentVle"]
-dfs = {n: pd.read_csv(f"data/{n}.csv") for n in names}   # sửa đường dẫn nếu cần
+dfs = {n: pd.read_csv(f"data_using/{n}.csv") for n in names}   # sửa đường dẫn nếu cần
 
 # def describe_table(name, d):
 #     print(f"\n### {name}  ({d.shape[0]:,} dòng, {d.shape[1]} cột)\n")

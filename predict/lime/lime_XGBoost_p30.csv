@@ -1,0 +1,301 @@
+test_row_index,model,progress_pct,lime_feature,lime_weight
+3957,XGBoost,30.0,clk_dataplus <= 0.00,-0.06556765927377713
+3957,XGBoost,30.0,imd_band_60-70% <= 0.00,0.05960870471829924
+3957,XGBoost,30.0,mean_score <= 68.50,0.05526584879262284
+3957,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.05325762271909348
+3957,XGBoost,30.0,imd_band_Unknown <= 0.00,0.04473753051793194
+3957,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.0415377462100308
+3957,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.03609841399029134
+3957,XGBoost,30.0,age_band_55le_ <= 0.00,0.03436037974420769
+3957,XGBoost,30.0,highest_education_Post_Graduate_Qualification <= 0.00,-0.03257557328688584
+3957,XGBoost,30.0,39.00 < clk_homepage <= 88.00,-0.030679832843982905
+3957,XGBoost,30.0,1.00 < last_active_gap <= 5.00,-0.029702382241867425
+3957,XGBoost,30.0,last_score <= 68.00,0.02822097382056677
+3957,XGBoost,30.0,region_London_Region <= 0.00,0.027847260073855098
+3957,XGBoost,30.0,clk_questionnaire <= 3.00,0.0248980982491324
+3957,XGBoost,30.0,region_South_Region <= 0.00,0.024330200691298796
+3382,XGBoost,30.0,imd_band_Unknown <= 0.00,0.05460476815088616
+3382,XGBoost,30.0,imd_band_60-70% <= 0.00,0.05353765033795517
+3382,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.05096605157396372
+3382,XGBoost,30.0,mean_score > 85.00,-0.047294943357659595
+3382,XGBoost,30.0,last_active_gap <= 1.00,-0.046582827938863106
+3382,XGBoost,30.0,clk_homepage > 169.00,0.035928467764737085
+3382,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.03576048985621768
+3382,XGBoost,30.0,clk_questionnaire <= 3.00,0.035690228083509655
+3382,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.03227963168382075
+3382,XGBoost,30.0,clk_ouwiki <= 19.00,0.03119684270544931
+3382,XGBoost,30.0,region_London_Region <= 0.00,0.03034191920075061
+3382,XGBoost,30.0,region_East_Midlands_Region <= 0.00,-0.02948921157618686
+3382,XGBoost,30.0,clk_oucontent > 189.50,-0.029089734071256815
+3382,XGBoost,30.0,region_North_Region <= 0.00,0.028945532354819073
+3382,XGBoost,30.0,clicks_total > 852.00,-0.02790112829006532
+766,XGBoost,30.0,clk_dataplus <= 0.00,-0.09069339767951969
+766,XGBoost,30.0,clk_sharedsubpage <= 0.00,-0.07649984002857434
+766,XGBoost,30.0,mean_score <= 68.50,0.06158368463069519
+766,XGBoost,30.0,imd_band_60-70% <= 0.00,0.051954057119735705
+766,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.04996758714712911
+766,XGBoost,30.0,last_active_gap <= 1.00,-0.0483377232255638
+766,XGBoost,30.0,imd_band_Unknown <= 0.00,0.04796988109647763
+766,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.04766761892197881
+766,XGBoost,30.0,clk_homepage > 169.00,0.03914175081953512
+766,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.03813531826852509
+766,XGBoost,30.0,imd_band_90-100% <= 0.00,0.036040546487722105
+766,XGBoost,30.0,clk_questionnaire <= 3.00,0.03505357231402495
+766,XGBoost,30.0,clicks_last14 > 77.00,-0.03145592213031286
+766,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.027102721711065883
+766,XGBoost,30.0,clk_ouwiki <= 19.00,0.025663064287162668
+5018,XGBoost,30.0,last_active_gap > 14.00,0.07971651083937029
+5018,XGBoost,30.0,clk_dataplus <= 0.00,-0.05834787694212429
+5018,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.04928298362594667
+5018,XGBoost,30.0,clk_questionnaire <= 3.00,0.04729273422134443
+5018,XGBoost,30.0,imd_band_60-70% <= 0.00,0.045509907236823445
+5018,XGBoost,30.0,highest_education_No_Formal_quals <= 0.00,0.04234652371727195
+5018,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.038982607950774226
+5018,XGBoost,30.0,imd_band_Unknown <= 0.00,0.03630007157740937
+5018,XGBoost,30.0,clicks_last14 <= 0.00,0.034790677025678764
+5018,XGBoost,30.0,clk_forumng <= 18.00,0.03357483271149667
+5018,XGBoost,30.0,clk_ouwiki <= 19.00,0.03237981770208437
+5018,XGBoost,30.0,13.00 < active_days <= 26.00,0.03081247955952484
+5018,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.030362477720152357
+5018,XGBoost,30.0,imd_band_90-100% > 0.00,-0.02838355653245638
+5018,XGBoost,30.0,region_North_Region <= 0.00,0.025333734670340398
+4083,XGBoost,30.0,active_days > 44.00,-0.07919982884569109
+4083,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.05431562951515299
+4083,XGBoost,30.0,last_active_gap <= 1.00,-0.049894520245505246
+4083,XGBoost,30.0,imd_band_Unknown <= 0.00,0.04500493249258402
+4083,XGBoost,30.0,clk_homepage > 169.00,0.04273260740371148
+4083,XGBoost,30.0,imd_band_60-70% <= 0.00,0.0407392966133109
+4083,XGBoost,30.0,8.00 < clk_url <= 17.00,0.036975894651514386
+4083,XGBoost,30.0,clk_forumng > 208.00,-0.03655653167271666
+4083,XGBoost,30.0,clk_dataplus <= 0.00,-0.03572748304350994
+4083,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.03387997991624384
+4083,XGBoost,30.0,clicks_last14 > 77.00,-0.033530826273815005
+4083,XGBoost,30.0,clk_questionnaire > 3.00,-0.031678843294191614
+4083,XGBoost,30.0,clk_subpage > 94.00,-0.0305559865168014
+4083,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.026889994272048415
+4083,XGBoost,30.0,clk_htmlactivity > 0.00,0.0039010586585673554
+3944,XGBoost,30.0,last_active_gap > 14.00,0.08152359816325777
+3944,XGBoost,30.0,imd_band_60-70% <= 0.00,0.062259032395921725
+3944,XGBoost,30.0,imd_band_Unknown <= 0.00,0.05641434871880049
+3944,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.04707895283390473
+3944,XGBoost,30.0,clk_dataplus <= 0.00,-0.046384491354976
+3944,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.038534301406397534
+3944,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.03774465867137034
+3944,XGBoost,30.0,clk_ouwiki <= 19.00,0.03601167340543581
+3944,XGBoost,30.0,clicks_last14 <= 0.00,0.03400038834666086
+3944,XGBoost,30.0,region_East_Midlands_Region <= 0.00,-0.031572091135487104
+3944,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.03147559673257813
+3944,XGBoost,30.0,39.00 < clk_homepage <= 88.00,-0.028977000359419563
+3944,XGBoost,30.0,highest_education_Post_Graduate_Qualification <= 0.00,-0.028940765001844417
+3944,XGBoost,30.0,clk_questionnaire <= 3.00,0.024028342861585953
+3944,XGBoost,30.0,region_Ireland > 0.00,-0.023556241826736234
+642,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.054000861503721666
+642,XGBoost,30.0,imd_band_Unknown <= 0.00,0.050833142175635664
+642,XGBoost,30.0,mean_score <= 68.50,0.050016640054353224
+642,XGBoost,30.0,last_active_gap <= 1.00,-0.045818407564218865
+642,XGBoost,30.0,clk_questionnaire <= 3.00,0.039748793760045205
+642,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.03960543805890261
+642,XGBoost,30.0,clk_ouwiki <= 19.00,0.03757044731231825
+642,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.03403609459902997
+642,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.03207135319015067
+642,XGBoost,30.0,imd_band_60-70% <= 0.00,0.031683997225851274
+642,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.030670306816987073
+642,XGBoost,30.0,clk_forumng > 208.00,-0.02856322397091335
+642,XGBoost,30.0,last_score <= 68.00,0.027267993313536524
+642,XGBoost,30.0,clk_dataplus <= 0.00,-0.026058036943934413
+642,XGBoost,30.0,clk_url <= 3.50,-0.021235411898071717
+573,XGBoost,30.0,active_days <= 13.00,0.06483387272484747
+573,XGBoost,30.0,mean_score <= 68.50,0.06262983697788368
+573,XGBoost,30.0,clk_dataplus <= 0.00,-0.059436340863414254
+573,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.05548158850346672
+573,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.04914591334055917
+573,XGBoost,30.0,imd_band_60-70% <= 0.00,0.0482272393041853
+573,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.03797147449125188
+573,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.033064848728494536
+573,XGBoost,30.0,last_score <= 68.00,0.03106888196378672
+573,XGBoost,30.0,0.00 < clicks_last14 <= 20.00,0.0292829531555649
+573,XGBoost,30.0,imd_band_90-100% <= 0.00,0.02772497839334414
+573,XGBoost,30.0,region_Scotland <= 0.00,-0.02578343169975161
+573,XGBoost,30.0,min_score <= 60.00,0.025406816649061175
+573,XGBoost,30.0,imd_band_Unknown <= 0.00,0.02476759423504081
+573,XGBoost,30.0,clk_questionnaire <= 3.00,0.023604618183246356
+3266,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.05520146568009443
+3266,XGBoost,30.0,imd_band_60-70% <= 0.00,0.05381836411234495
+3266,XGBoost,30.0,mean_score > 85.00,-0.04558218190148275
+3266,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.043329971496752155
+3266,XGBoost,30.0,imd_band_Unknown <= 0.00,0.03849393637798597
+3266,XGBoost,30.0,0.00 < clicks_last14 <= 20.00,0.03333307154466979
+3266,XGBoost,30.0,8.00 < clk_url <= 17.00,0.03246870023426576
+3266,XGBoost,30.0,clk_questionnaire <= 3.00,0.03213349584982363
+3266,XGBoost,30.0,clk_resource <= 5.00,0.03063267716129745
+3266,XGBoost,30.0,imd_band_0-10% > 0.00,0.02972267752673394
+3266,XGBoost,30.0,imd_band_40-50% <= 0.00,-0.02858761657831478
+3266,XGBoost,30.0,region_West_Midlands_Region <= 0.00,0.02847107113062891
+3266,XGBoost,30.0,imd_band_80-90% <= 0.00,0.028178795767578983
+3266,XGBoost,30.0,39.00 < clk_homepage <= 88.00,-0.026943240172439372
+3266,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.024943455504833
+2452,XGBoost,30.0,active_days > 44.00,-0.07653718768663703
+2452,XGBoost,30.0,imd_band_60-70% > 0.00,-0.05045846280784363
+2452,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.049868323964433615
+2452,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.04836415946432271
+2452,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.04715220838790525
+2452,XGBoost,30.0,clk_dataplus <= 0.00,-0.046813066042615335
+2452,XGBoost,30.0,imd_band_Unknown <= 0.00,0.043165054894670866
+2452,XGBoost,30.0,clk_subpage > 94.00,-0.03854311990853634
+2452,XGBoost,30.0,clk_homepage > 169.00,0.03435896202646912
+2452,XGBoost,30.0,imd_band_40-50% <= 0.00,-0.03099403554716791
+2452,XGBoost,30.0,region_Scotland <= 0.00,-0.029194000552633763
+2452,XGBoost,30.0,region_North_Region <= 0.00,0.029121026789015295
+2452,XGBoost,30.0,clk_questionnaire <= 3.00,0.028540396116294407
+2452,XGBoost,30.0,clicks_total > 852.00,-0.028095780557416614
+2452,XGBoost,30.0,highest_education_Post_Graduate_Qualification <= 0.00,0.026638117134810884
+1726,XGBoost,30.0,last_active_gap > 14.00,0.07300822499443801
+1726,XGBoost,30.0,clk_dataplus <= 0.00,-0.06924490123469017
+1726,XGBoost,30.0,imd_band_60-70% <= 0.00,0.06403028177593463
+1726,XGBoost,30.0,imd_band_Unknown <= 0.00,0.0586737983857863
+1726,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.058506523790026334
+1726,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.04624070021048291
+1726,XGBoost,30.0,clk_questionnaire <= 3.00,0.04022766252267364
+1726,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.03964719166372649
+1726,XGBoost,30.0,region_East_Midlands_Region <= 0.00,-0.035373302008656224
+1726,XGBoost,30.0,clk_ouwiki <= 19.00,0.035293741783136816
+1726,XGBoost,30.0,clicks_last14 <= 0.00,0.03487209914417956
+1726,XGBoost,30.0,region_South_West_Region <= 0.00,0.029488608125100964
+1726,XGBoost,30.0,425.00 < clicks_total <= 852.00,-0.0278399382730846
+1726,XGBoost,30.0,clk_quiz > 95.50,-0.027222214327104952
+1726,XGBoost,30.0,clk_externalquiz <= 4.00,0.023739595385631716
+568,XGBoost,30.0,imd_band_60-70% <= 0.00,0.05501479756212044
+568,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.05307092698788214
+568,XGBoost,30.0,mean_score <= 68.50,0.051380047158535544
+568,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.04565162191019992
+568,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.042093788325241195
+568,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.039364623347640654
+568,XGBoost,30.0,clk_ouwiki <= 19.00,0.036760354938535994
+568,XGBoost,30.0,clk_homepage > 169.00,0.033490146170181465
+568,XGBoost,30.0,clk_questionnaire <= 3.00,0.03291119890125836
+568,XGBoost,30.0,clk_resource > 26.00,-0.03258784639483301
+568,XGBoost,30.0,clk_quiz > 95.50,-0.03256466946710978
+568,XGBoost,30.0,code_module_AAA <= 0.00,-0.03141564479761196
+568,XGBoost,30.0,age_band_55le_ <= 0.00,0.02996606042438369
+568,XGBoost,30.0,imd_band_0-10% > 0.00,0.02750594878486753
+568,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.02161770727553669
+1763,XGBoost,30.0,highest_education_No_Formal_quals <= 0.00,0.05847848412299888
+1763,XGBoost,30.0,imd_band_Unknown <= 0.00,0.053770561864320936
+1763,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.05052801634134242
+1763,XGBoost,30.0,imd_band_60-70% <= 0.00,0.050455739395633414
+1763,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.041987752941992675
+1763,XGBoost,30.0,clk_quiz > 95.50,-0.03434093469616131
+1763,XGBoost,30.0,clk_questionnaire <= 3.00,0.03071880741845192
+1763,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.03028821421906102
+1763,XGBoost,30.0,68.00 < last_score <= 80.00,0.027262062362758688
+1763,XGBoost,30.0,clk_forumng <= 18.00,0.027122578378740846
+1763,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.026839749712338268
+1763,XGBoost,30.0,1.00 < last_active_gap <= 5.00,-0.026405376348588565
+1763,XGBoost,30.0,click_trend <= -57.00,-0.025712716352776194
+1763,XGBoost,30.0,clk_dataplus <= 0.00,-0.013619058632125421
+1763,XGBoost,30.0,age_band_55le_ <= 0.00,0.012183910120200567
+4104,XGBoost,30.0,active_days > 44.00,-0.0815935008388558
+4104,XGBoost,30.0,clk_subpage > 94.00,-0.05343899051159419
+4104,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.0503995593817881
+4104,XGBoost,30.0,imd_band_Unknown > 0.00,-0.043252542685541115
+4104,XGBoost,30.0,imd_band_60-70% <= 0.00,0.041706329908180316
+4104,XGBoost,30.0,8.00 < clk_url <= 17.00,0.03780831542140543
+4104,XGBoost,30.0,num_of_prev_attempts > 0.00,0.035736951607894675
+4104,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.03480394853234613
+4104,XGBoost,30.0,clk_homepage > 169.00,0.030902255262710936
+4104,XGBoost,30.0,clk_questionnaire > 3.00,-0.03061032566544786
+4104,XGBoost,30.0,region_Scotland <= 0.00,-0.028775662078517426
+4104,XGBoost,30.0,clk_ouwiki > 19.00,-0.0278425640721586
+4104,XGBoost,30.0,clicks_last14 > 77.00,-0.027486981174444383
+4104,XGBoost,30.0,clk_dataplus <= 0.00,-0.019223173529111397
+4104,XGBoost,30.0,clk_htmlactivity > 0.00,-0.008447074559699865
+583,XGBoost,30.0,mean_score <= 68.50,0.05283565825839713
+583,XGBoost,30.0,clk_dataplus <= 0.00,-0.050880275575309934
+583,XGBoost,30.0,imd_band_60-70% <= 0.00,0.048928002999031134
+583,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.04778018483802961
+583,XGBoost,30.0,imd_band_Unknown <= 0.00,0.04539460939313255
+583,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.041824193434449
+583,XGBoost,30.0,num_of_prev_attempts > 0.00,0.04065794054720933
+583,XGBoost,30.0,last_score <= 68.00,0.04029749979996962
+583,XGBoost,30.0,45.00 < clk_oucontent <= 189.50,0.03822293863416919
+583,XGBoost,30.0,clk_questionnaire <= 3.00,0.036636922067994696
+583,XGBoost,30.0,age_band_55le_ <= 0.00,-0.03550518169140494
+583,XGBoost,30.0,clk_sharedsubpage <= 0.00,-0.033026710436427055
+583,XGBoost,30.0,13.00 < active_days <= 26.00,0.032947175603541975
+583,XGBoost,30.0,1.00 < last_active_gap <= 5.00,-0.031411392711555186
+583,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.03087056478312706
+3900,XGBoost,30.0,mean_score > 85.00,-0.050128595014977045
+3900,XGBoost,30.0,last_active_gap <= 1.00,-0.04568786748638265
+3900,XGBoost,30.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.04420917166370539
+3900,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.043360593913929546
+3900,XGBoost,30.0,clk_subpage > 94.00,-0.043026314485539265
+3900,XGBoost,30.0,last_score > 92.00,-0.04031671517943975
+3900,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.04013428354788688
+3900,XGBoost,30.0,imd_band_Unknown <= 0.00,0.03990193524022686
+3900,XGBoost,30.0,clk_homepage > 169.00,0.03942567940833481
+3900,XGBoost,30.0,clicks_last14 > 77.00,-0.03835698997921871
+3900,XGBoost,30.0,clk_sharedsubpage <= 0.00,-0.03407131912825086
+3900,XGBoost,30.0,imd_band_60-70% > 0.00,-0.03133158400566936
+3900,XGBoost,30.0,region_London_Region <= 0.00,0.03108697197778961
+3900,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.029119374642741083
+3900,XGBoost,30.0,clk_htmlactivity > 0.00,-0.004788707845183086
+3988,XGBoost,30.0,clk_htmlactivity > 0.00,0.1657419997131346
+3988,XGBoost,30.0,last_active_gap > 14.00,0.06811532866435548
+3988,XGBoost,30.0,imd_band_Unknown <= 0.00,0.06232899255930691
+3988,XGBoost,30.0,clk_dataplus <= 0.00,-0.05847193800897208
+3988,XGBoost,30.0,active_days <= 13.00,0.05450187986693783
+3988,XGBoost,30.0,imd_band_60-70% <= 0.00,0.053104208837146866
+3988,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.05177981700793948
+3988,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.04230633760312855
+3988,XGBoost,30.0,clicks_last14 <= 0.00,0.04175810288018589
+3988,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.03812672399027273
+3988,XGBoost,30.0,clicks_total <= 167.50,0.03779388991623639
+3988,XGBoost,30.0,age_band_55le_ <= 0.00,0.03474925059504428
+3988,XGBoost,30.0,clk_ouelluminate <= 1.00,-0.03401267515193326
+3988,XGBoost,30.0,clk_quiz <= 15.00,0.03185617247104991
+3988,XGBoost,30.0,code_module_AAA <= 0.00,0.03172380155307703
+1736,XGBoost,30.0,last_active_gap > 14.00,0.07181183660531515
+1736,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.05491724152662523
+1736,XGBoost,30.0,imd_band_Unknown <= 0.00,0.05452946739581585
+1736,XGBoost,30.0,imd_band_60-70% <= 0.00,0.04895295104759951
+1736,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.048628403104425
+1736,XGBoost,30.0,clk_sharedsubpage <= 0.00,0.03950169660500381
+1736,XGBoost,30.0,clicks_last14 <= 0.00,0.03576756638902144
+1736,XGBoost,30.0,imd_band_0-10% <= 0.00,-0.03406265210412369
+1736,XGBoost,30.0,13.00 < active_days <= 26.00,0.0324172584012707
+1736,XGBoost,30.0,clk_questionnaire <= 3.00,0.031493924786634875
+1736,XGBoost,30.0,age_band_55le_ <= 0.00,0.031028425389882226
+1736,XGBoost,30.0,clk_resource > 26.00,-0.028886725928350666
+1736,XGBoost,30.0,imd_band_90-100% <= 0.00,0.02877347146825691
+1736,XGBoost,30.0,clk_ouwiki <= 19.00,0.02794770921570635
+1736,XGBoost,30.0,last_score <= 68.00,0.02729027395458487
+3342,XGBoost,30.0,active_days > 44.00,-0.07384655604974098
+3342,XGBoost,30.0,clk_dataplus <= 0.00,-0.05781243943240313
+3342,XGBoost,30.0,imd_band_Unknown <= 0.00,0.056111362398921207
+3342,XGBoost,30.0,imd_band_60-70% <= 0.00,0.04867287450671075
+3342,XGBoost,30.0,mean_score > 85.00,-0.04831146149177103
+3342,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.04523163067233761
+3342,XGBoost,30.0,last_score > 92.00,-0.044823060601362825
+3342,XGBoost,30.0,clk_homepage > 169.00,0.04119377184381598
+3342,XGBoost,30.0,last_active_gap <= 1.00,-0.03948233335385577
+3342,XGBoost,30.0,clicks_last14 > 77.00,-0.03839551263932421
+3342,XGBoost,30.0,clk_forumng > 208.00,-0.033788883488182486
+3342,XGBoost,30.0,clk_oucontent > 189.50,-0.03336113999180078
+3342,XGBoost,30.0,clk_quiz > 95.50,-0.03275929390186828
+3342,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.03067313016849067
+3342,XGBoost,30.0,clk_ouwiki <= 19.00,0.0305995720449105
+2472,XGBoost,30.0,active_days > 44.00,-0.08619198805063728
+2472,XGBoost,30.0,highest_education_Lower_Than_A_Level <= 0.00,-0.0568079726248811
+2472,XGBoost,30.0,clicks_per_active_day <= 11.54,-0.0445362569553214
+2472,XGBoost,30.0,highest_education_Post_Graduate_Qualification <= 0.00,0.044187733771512326
+2472,XGBoost,30.0,clk_dataplus <= 0.00,-0.040179750549638175
+2472,XGBoost,30.0,age_band_55le_ <= 0.00,-0.03981361531629268
+2472,XGBoost,30.0,highest_education_No_Formal_quals <= 0.00,0.03976244198332922
+2472,XGBoost,30.0,clk_questionnaire <= 3.00,0.03847850642640093
+2472,XGBoost,30.0,imd_band_Unknown <= 0.00,0.03688697644736844
+2472,XGBoost,30.0,imd_band_60-70% <= 0.00,0.03574890239715979
+2472,XGBoost,30.0,num_of_prev_attempts <= 0.00,-0.034982077464374005
+2472,XGBoost,30.0,1.00 < last_active_gap <= 5.00,-0.032819019335077686
+2472,XGBoost,30.0,68.00 < last_score <= 80.00,0.032814681336299716
+2472,XGBoost,30.0,8.00 < clk_url <= 17.00,0.030345338293448952
+2472,XGBoost,30.0,imd_band_90-100% <= 0.00,0.025510427622915156

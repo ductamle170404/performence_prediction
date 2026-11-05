@@ -1,0 +1,301 @@
+test_row_index,model,progress_pct,lime_feature,lime_weight
+3857,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06799417460540606
+3857,RandomForest,40.0,mean_score <= 68.00,0.06373318654613556
+3857,RandomForest,40.0,n_missed <= 0.00,-0.06288041171258882
+3857,RandomForest,40.0,clk_htmlactivity > 0.00,-0.0443236810877027
+3857,RandomForest,40.0,last_score <= 66.00,0.03765287613471668
+3857,RandomForest,40.0,last_active_gap <= 0.00,-0.03585668689399259
+3857,RandomForest,40.0,clicks_last7 > 34.00,-0.028285643834432345
+3857,RandomForest,40.0,clicks_prev14 > 74.00,-0.02712487900115679
+3857,RandomForest,40.0,clicks_last14 > 91.00,-0.02154942239754318
+3857,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.02027495731708462
+3857,RandomForest,40.0,imd_band_90-100% <= 0.00,-0.016479590294249318
+3857,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.016027476127412087
+3857,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.015863641916005217
+3857,RandomForest,40.0,15.00 < active_days <= 32.00,0.015407159097199185
+3857,RandomForest,40.0,imd_band_0-10% <= 0.00,-0.01497404200325912
+3303,RandomForest,40.0,submit_rate <= 0.80,0.059013826119823
+3303,RandomForest,40.0,0.00 < n_missed <= 1.00,0.04510344981414798
+3303,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.02425577987624745
+3303,RandomForest,40.0,69.00 < min_score <= 78.00,-0.022736929961514614
+3303,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.022667166951673572
+3303,RandomForest,40.0,15.00 < active_days <= 32.00,0.019215449034925496
+3303,RandomForest,40.0,clk_sharedsubpage <= 0.00,0.01796825104836328
+3303,RandomForest,40.0,clk_quiz > 102.00,-0.017269176815157484
+3303,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01616468384263656
+3303,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.014946427807106174
+3303,RandomForest,40.0,imd_band_0-10% <= 0.00,-0.013279716545457464
+3303,RandomForest,40.0,imd_band_20-30% <= 0.00,0.010760604783124805
+3303,RandomForest,40.0,6.00 < clicks_last7 <= 34.00,-0.010126963203961871
+3303,RandomForest,40.0,region_Wales <= 0.00,0.009612891471647799
+3303,RandomForest,40.0,1.00 < clicks_prev14 <= 26.00,0.009378437782453713
+751,RandomForest,40.0,mean_score <= 68.00,0.06636421060432314
+751,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06541239253319173
+751,RandomForest,40.0,last_active_gap > 12.00,0.06365068620503232
+751,RandomForest,40.0,n_missed <= 0.00,-0.061976993235497345
+751,RandomForest,40.0,min_score <= 58.00,0.04803318330988578
+751,RandomForest,40.0,clicks_last14 <= 2.00,0.041379209594094093
+751,RandomForest,40.0,last_score <= 66.00,0.041152415216093446
+751,RandomForest,40.0,clicks_prev14 <= 1.00,0.032866616316140726
+751,RandomForest,40.0,clicks_last7 <= 0.00,0.03025013742547909
+751,RandomForest,40.0,active_days <= 15.00,0.02631488891331072
+751,RandomForest,40.0,clk_quiz <= 27.00,0.02444335422346629
+751,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.01969329085844806
+751,RandomForest,40.0,num_of_prev_attempts > 0.00,0.019662366302236996
+751,RandomForest,40.0,weight_due <= 38.00,-0.014969445669231096
+751,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.01342527828490756
+4888,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.0649744939050775
+4888,RandomForest,40.0,n_missed <= 0.00,-0.06446811993494378
+4888,RandomForest,40.0,mean_score <= 68.00,0.06281249877092938
+4888,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,0.03569663850302654
+4888,RandomForest,40.0,last_score <= 66.00,0.034024172411995936
+4888,RandomForest,40.0,clk_dataplus <= 0.00,-0.033062290580386615
+4888,RandomForest,40.0,clk_quiz <= 27.00,0.028024106513740973
+4888,RandomForest,40.0,0.00 < last_active_gap <= 3.00,-0.027996358036735388
+4888,RandomForest,40.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.01883757825277578
+4888,RandomForest,40.0,num_of_prev_attempts > 0.00,0.018544685678955144
+4888,RandomForest,40.0,age_band_55le_ <= 0.00,0.016376647390775496
+4888,RandomForest,40.0,28.00 < clicks_last14 <= 91.00,-0.01631583085803294
+4888,RandomForest,40.0,weight_due <= 38.00,-0.014018454443707801
+4888,RandomForest,40.0,clicks_total <= 199.00,0.013589770629982671
+4888,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,0.009866472527334705
+3981,RandomForest,40.0,submit_rate <= 0.80,0.06185972282871286
+3981,RandomForest,40.0,0.00 < n_missed <= 1.00,0.046406875315980756
+3981,RandomForest,40.0,last_active_gap <= 0.00,-0.03510256276186706
+3981,RandomForest,40.0,clk_htmlactivity > 0.00,-0.031753797670608895
+3981,RandomForest,40.0,clk_quiz <= 27.00,0.023903046011617288
+3981,RandomForest,40.0,68.00 < mean_score <= 77.60,0.018790461550582074
+3981,RandomForest,40.0,28.00 < clicks_last14 <= 91.00,-0.018515798890605315
+3981,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.016978177040420806
+3981,RandomForest,40.0,clk_dataplus <= 0.00,-0.016332468922391437
+3981,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.01579429362191846
+3981,RandomForest,40.0,imd_band_80-90% <= 0.00,0.013998773921568201
+3981,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,0.01288214599058945
+3981,RandomForest,40.0,code_module_AAA <= 0.00,0.012591968031911338
+3981,RandomForest,40.0,region_North_Region > 0.00,0.01231044869491859
+3981,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,-0.012032173569121226
+3845,RandomForest,40.0,n_missed <= 0.00,-0.06500581754022512
+3845,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.061165565071429076
+3845,RandomForest,40.0,clk_htmlactivity > 0.00,-0.05862645467427807
+3845,RandomForest,40.0,mean_score > 85.00,-0.048024743070848606
+3845,RandomForest,40.0,min_score > 78.00,-0.03449407681536236
+3845,RandomForest,40.0,last_score > 90.00,-0.02803846566563748
+3845,RandomForest,40.0,clicks_last7 > 34.00,-0.02747504127373348
+3845,RandomForest,40.0,0.00 < last_active_gap <= 3.00,-0.02570151588012212
+3845,RandomForest,40.0,clicks_last14 > 91.00,-0.024849485853800153
+3845,RandomForest,40.0,active_days > 54.00,-0.02313963611773423
+3845,RandomForest,40.0,clicks_prev14 > 74.00,-0.0225662896598451
+3845,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.017337270939799126
+3845,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,0.016666713564262935
+3845,RandomForest,40.0,clk_dataplus <= 0.00,-0.013383675471093363
+3845,RandomForest,40.0,age_band_55le_ <= 0.00,0.006896966124353217
+630,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06275697642628127
+630,RandomForest,40.0,n_missed <= 0.00,-0.062313439658647364
+630,RandomForest,40.0,77.60 < mean_score <= 85.00,-0.03886027074786737
+630,RandomForest,40.0,last_active_gap <= 0.00,-0.038388527093966396
+630,RandomForest,40.0,last_score <= 66.00,0.037185633941258574
+630,RandomForest,40.0,clk_dataplus <= 0.00,-0.026671072462439393
+630,RandomForest,40.0,num_of_prev_attempts > 0.00,0.01793826006366598
+630,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.015568746776811086
+630,RandomForest,40.0,15.00 < active_days <= 32.00,0.01396270398608225
+630,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.013751554456718686
+630,RandomForest,40.0,n_submitted <= 2.00,0.012990169949138704
+630,RandomForest,40.0,disability_Y <= 0.00,-0.011963039781774761
+630,RandomForest,40.0,weight_due <= 38.00,-0.010310467767839566
+630,RandomForest,40.0,0.00 < highest_education_A_Level_or_Equivalent <= 1.00,-0.009071553843144103
+630,RandomForest,40.0,clk_sharedsubpage <= 0.00,0.008637164228782655
+563,RandomForest,40.0,last_active_gap > 12.00,0.06662890066732667
+563,RandomForest,40.0,n_missed <= 0.00,-0.06605415363679541
+563,RandomForest,40.0,mean_score <= 68.00,0.06523929329739588
+563,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06506922602417246
+563,RandomForest,40.0,min_score <= 58.00,0.04699453514740477
+563,RandomForest,40.0,clicks_last14 <= 2.00,0.044375292138617926
+563,RandomForest,40.0,clicks_last7 <= 0.00,0.033096763021651265
+563,RandomForest,40.0,clicks_prev14 <= 1.00,0.03178717801980595
+563,RandomForest,40.0,active_days <= 15.00,0.0282026049485461
+563,RandomForest,40.0,clk_dataplus <= 0.00,0.024519814258695736
+563,RandomForest,40.0,clk_quiz <= 27.00,0.024204136961712884
+563,RandomForest,40.0,num_of_prev_attempts > 0.00,0.01931389151699991
+563,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.01824387759267641
+563,RandomForest,40.0,clicks_total <= 199.00,0.017614048818931326
+563,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.014741338342256634
+3190,RandomForest,40.0,n_missed <= 0.00,-0.0659890102768091
+3190,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06282494018338214
+3190,RandomForest,40.0,mean_score > 85.00,-0.04750267503075596
+3190,RandomForest,40.0,clicks_last7 <= 0.00,0.03282175868212506
+3190,RandomForest,40.0,min_score > 78.00,-0.03209629129263626
+3190,RandomForest,40.0,80.00 < last_score <= 90.00,-0.023203770838286362
+3190,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,0.019028707284224042
+3190,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.017328330587651743
+3190,RandomForest,40.0,clk_oucontent > 234.00,-0.017219669892203797
+3190,RandomForest,40.0,clk_dataplus <= 0.00,0.016845344627550864
+3190,RandomForest,40.0,region_Ireland <= 0.00,0.015287612885562471
+3190,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.01411728741413168
+3190,RandomForest,40.0,clk_quiz > 102.00,-0.013868919225391931
+3190,RandomForest,40.0,1.00 < clicks_prev14 <= 26.00,0.013067537753137327
+3190,RandomForest,40.0,imd_band_0-10% <= 0.00,-0.011319795761860466
+2398,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06679679120287015
+2398,RandomForest,40.0,n_missed <= 0.00,-0.06200328918493783
+2398,RandomForest,40.0,active_days > 54.00,-0.029945411676804676
+2398,RandomForest,40.0,last_score > 90.00,-0.02972675933974023
+2398,RandomForest,40.0,0.00 < last_active_gap <= 3.00,-0.028545052793740207
+2398,RandomForest,40.0,28.00 < clicks_last14 <= 91.00,-0.02376748001868059
+2398,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.023268868711362606
+2398,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.017536904698925892
+2398,RandomForest,40.0,68.00 < mean_score <= 77.60,0.017479890487290758
+2398,RandomForest,40.0,26.00 < clicks_prev14 <= 74.00,-0.016864828656946086
+2398,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,-0.016584170062218063
+2398,RandomForest,40.0,clicks_total > 1009.00,-0.01599552316066985
+2398,RandomForest,40.0,weight_due <= 38.00,-0.015047797117324733
+2398,RandomForest,40.0,6.00 < clicks_last7 <= 34.00,-0.014439342263565842
+2398,RandomForest,40.0,age_band_55le_ <= 0.00,-0.010613223283878658
+1688,RandomForest,40.0,submit_rate <= 0.80,0.06947253711190843
+1688,RandomForest,40.0,n_missed > 1.00,0.05539228554074561
+1688,RandomForest,40.0,clicks_last7 <= 0.00,0.030209521413235137
+1688,RandomForest,40.0,clk_sharedsubpage <= 0.00,0.028391076907201142
+1688,RandomForest,40.0,clicks_prev14 <= 1.00,0.02778936836574203
+1688,RandomForest,40.0,active_days <= 15.00,0.021984389668700092
+1688,RandomForest,40.0,clk_dataplus <= 0.00,-0.02040897614168256
+1688,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.02003078270313669
+1688,RandomForest,40.0,clicks_total <= 199.00,0.018802348321666006
+1688,RandomForest,40.0,num_of_prev_attempts > 0.00,0.015230694380779904
+1688,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01314216166023791
+1688,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.012951397061673049
+1688,RandomForest,40.0,weight_due <= 38.00,-0.012150999649921317
+1688,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,0.011902348987549254
+1688,RandomForest,40.0,imd_band_40-50% <= 0.00,-0.011831828881728587
+558,RandomForest,40.0,n_missed > 1.00,0.06582280157569614
+558,RandomForest,40.0,last_active_gap > 12.00,0.06513051389894464
+558,RandomForest,40.0,submit_rate <= 0.80,0.06331898517394302
+558,RandomForest,40.0,clicks_last14 <= 2.00,0.04454908348704905
+558,RandomForest,40.0,clicks_prev14 <= 1.00,0.03371102395588533
+558,RandomForest,40.0,clicks_last7 <= 0.00,0.02790747211197666
+558,RandomForest,40.0,active_days <= 15.00,0.02280442980274711
+558,RandomForest,40.0,clk_quiz <= 27.00,0.022348343996642168
+558,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.02056721290053165
+558,RandomForest,40.0,clk_dataplus <= 0.00,0.020210957850686755
+558,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.01744982744151048
+558,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01674264072668757
+558,RandomForest,40.0,clk_sharedsubpage <= 0.00,-0.013033596864643948
+558,RandomForest,40.0,weight_due <= 38.00,-0.012660929738746942
+558,RandomForest,40.0,n_submitted <= 2.00,0.012602609791368383
+1723,RandomForest,40.0,last_active_gap > 12.00,0.06512582143836411
+1723,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.064908354092433
+1723,RandomForest,40.0,n_missed <= 0.00,-0.06224632214831623
+1723,RandomForest,40.0,min_score <= 58.00,0.04440958610201521
+1723,RandomForest,40.0,clicks_last14 <= 2.00,0.04415936634324859
+1723,RandomForest,40.0,last_score <= 66.00,0.04057359459851756
+1723,RandomForest,40.0,clicks_last7 <= 0.00,0.033924688570419956
+1723,RandomForest,40.0,active_days > 54.00,-0.026225905564632584
+1723,RandomForest,40.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.018441518605512318
+1723,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01762998840306437
+1723,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.01690260364625361
+1723,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,-0.014732409389729419
+1723,RandomForest,40.0,imd_band_60-70% <= 0.00,0.01422718341641204
+1723,RandomForest,40.0,weight_due <= 38.00,-0.014117879005202116
+1723,RandomForest,40.0,clk_quiz > 102.00,-0.013189094536291269
+4001,RandomForest,40.0,n_missed <= 0.00,-0.06415890198391956
+4001,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06274293551629154
+4001,RandomForest,40.0,clk_htmlactivity > 0.00,-0.05839537748585634
+4001,RandomForest,40.0,0.00 < last_active_gap <= 3.00,-0.031009237678788278
+4001,RandomForest,40.0,clicks_last14 > 91.00,-0.029149259991531326
+4001,RandomForest,40.0,clicks_last7 > 34.00,-0.027497987461560697
+4001,RandomForest,40.0,active_days > 54.00,-0.022353182433014707
+4001,RandomForest,40.0,clk_sharedsubpage <= 0.00,0.021717664278286773
+4001,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.01815127452575159
+4001,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01752699092711432
+4001,RandomForest,40.0,26.00 < clicks_prev14 <= 74.00,-0.01687608068071346
+4001,RandomForest,40.0,imd_band_80-90% <= 0.00,0.013114034268703318
+4001,RandomForest,40.0,clicks_total > 1009.00,-0.012810475441313246
+4001,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.01275020607391477
+4001,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.010643578518763052
+572,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06653841548365558
+572,RandomForest,40.0,n_missed <= 0.00,-0.06260907042644649
+572,RandomForest,40.0,last_active_gap > 12.00,0.06172184017697225
+572,RandomForest,40.0,min_score <= 58.00,0.04747297841735017
+572,RandomForest,40.0,clicks_last14 <= 2.00,0.044307533546766635
+572,RandomForest,40.0,last_score <= 66.00,0.038451743895535385
+572,RandomForest,40.0,77.60 < mean_score <= 85.00,-0.03806496695171493
+572,RandomForest,40.0,clicks_prev14 <= 1.00,0.034871535553982556
+572,RandomForest,40.0,clicks_last7 <= 0.00,0.029741622998500035
+572,RandomForest,40.0,active_days <= 15.00,0.02188354109893473
+572,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.01911270222627702
+572,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.012848948138827055
+572,RandomForest,40.0,weight_due <= 38.00,-0.01227313491216674
+572,RandomForest,40.0,0.00 < highest_education_A_Level_or_Equivalent <= 1.00,-0.009229438076226695
+572,RandomForest,40.0,age_band_55le_ <= 0.00,0.008862341436315448
+3802,RandomForest,40.0,clk_htmlactivity > 0.00,-0.0796495626134967
+3802,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06439163166479189
+3802,RandomForest,40.0,n_missed <= 0.00,-0.06340244740388333
+3802,RandomForest,40.0,mean_score > 85.00,-0.05157108167152957
+3802,RandomForest,40.0,last_active_gap <= 0.00,-0.03990976595601478
+3802,RandomForest,40.0,min_score > 78.00,-0.03387308001554551
+3802,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,0.02989140162816667
+3802,RandomForest,40.0,clicks_prev14 > 74.00,-0.027324739272666345
+3802,RandomForest,40.0,clicks_last14 > 91.00,-0.026304874015503465
+3802,RandomForest,40.0,active_days > 54.00,-0.025471405285783115
+3802,RandomForest,40.0,clicks_last7 > 34.00,-0.024672824526301082
+3802,RandomForest,40.0,80.00 < last_score <= 90.00,-0.019958131862621287
+3802,RandomForest,40.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.019276984469088463
+3802,RandomForest,40.0,age_band_55le_ <= 0.00,-0.017768941862368774
+3802,RandomForest,40.0,clicks_total > 1009.00,-0.014547891350071012
+3888,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06357220331504485
+3888,RandomForest,40.0,n_missed <= 0.00,-0.06230323061170718
+3888,RandomForest,40.0,clk_htmlactivity > 0.00,0.06069192265584696
+3888,RandomForest,40.0,min_score <= 58.00,0.048444523167293155
+3888,RandomForest,40.0,last_score <= 66.00,0.04464623951794814
+3888,RandomForest,40.0,clk_sharedsubpage <= 0.00,0.028774186755154352
+3888,RandomForest,40.0,0.00 < last_active_gap <= 3.00,-0.027217959420143118
+3888,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,0.02431645334347121
+3888,RandomForest,40.0,0.00 < highest_education_Lower_Than_A_Level <= 1.00,0.018146258173689766
+3888,RandomForest,40.0,68.00 < mean_score <= 77.60,0.01563291519397315
+3888,RandomForest,40.0,region_Ireland <= 0.00,-0.014175820689207936
+3888,RandomForest,40.0,clk_quiz > 102.00,-0.012656913860014763
+3888,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.01194915611025512
+3888,RandomForest,40.0,age_band_55le_ <= 0.00,0.011867372939489486
+3888,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.01149439835803735
+1697,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.060772251402836444
+1697,RandomForest,40.0,n_missed <= 0.00,-0.05830455262774841
+1697,RandomForest,40.0,last_active_gap <= 0.00,-0.03571791008778322
+1697,RandomForest,40.0,clicks_last7 > 34.00,-0.022484468006345463
+1697,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.019672749715095427
+1697,RandomForest,40.0,clk_oucontent > 234.00,-0.0155828446791792
+1697,RandomForest,40.0,weight_due <= 38.00,-0.015446093801018145
+1697,RandomForest,40.0,clk_quiz > 102.00,-0.014617817711439645
+1697,RandomForest,40.0,clicks_total > 1009.00,-0.014483535581371974
+1697,RandomForest,40.0,code_module_GGG <= 0.00,0.014068784195557888
+1697,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.013233527194260996
+1697,RandomForest,40.0,code_module_AAA <= 0.00,-0.013073636270361027
+1697,RandomForest,40.0,imd_band_10-20 <= 0.00,-0.012967246046949538
+1697,RandomForest,40.0,28.00 < clicks_last14 <= 91.00,-0.012163033981761192
+1697,RandomForest,40.0,68.00 < mean_score <= 77.60,0.011277025471375527
+3265,RandomForest,40.0,n_missed <= 0.00,-0.06645940509617523
+3265,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06420387734122651
+3265,RandomForest,40.0,mean_score > 85.00,-0.05130363538357265
+3265,RandomForest,40.0,min_score > 78.00,-0.03722060874938294
+3265,RandomForest,40.0,clicks_prev14 <= 1.00,0.03592301572075309
+3265,RandomForest,40.0,last_active_gap <= 0.00,-0.03285858973173615
+3265,RandomForest,40.0,last_score > 90.00,-0.025080241198733765
+3265,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.020426808673044895
+3265,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.019252477366014206
+3265,RandomForest,40.0,highest_education_Post_Graduate_Qualification <= 0.00,0.015896127517163353
+3265,RandomForest,40.0,imd_band_0-10% <= 0.00,-0.014440872485836517
+3265,RandomForest,40.0,n_submitted <= 2.00,0.012554548641590942
+3265,RandomForest,40.0,32.00 < active_days <= 54.00,-0.011839281518037101
+3265,RandomForest,40.0,clk_externalquiz <= 4.00,-0.011494414505174362
+3265,RandomForest,40.0,6.00 < clicks_last7 <= 34.00,-0.00998393024372889
+2417,RandomForest,40.0,0.80 < submit_rate <= 1.00,-0.06295455532678904
+2417,RandomForest,40.0,n_missed <= 0.00,-0.06272435249005115
+2417,RandomForest,40.0,mean_score > 85.00,-0.056086283253886926
+2417,RandomForest,40.0,last_active_gap <= 0.00,-0.0366606422835293
+2417,RandomForest,40.0,min_score > 78.00,-0.03235924406442219
+2417,RandomForest,40.0,clicks_last14 > 91.00,-0.027740861053260797
+2417,RandomForest,40.0,active_days > 54.00,-0.026776946202497477
+2417,RandomForest,40.0,clicks_last7 > 34.00,-0.026131339822275303
+2417,RandomForest,40.0,highest_education_No_Formal_quals <= 0.00,-0.025833965942889253
+2417,RandomForest,40.0,clicks_prev14 > 74.00,-0.025673204481491924
+2417,RandomForest,40.0,last_score > 90.00,-0.022500669889251357
+2417,RandomForest,40.0,highest_education_Lower_Than_A_Level <= 0.00,-0.020655447795387864
+2417,RandomForest,40.0,clk_ouelluminate <= 1.00,-0.017280006363412058
+2417,RandomForest,40.0,num_of_prev_attempts <= 0.00,-0.014897038938849187
+2417,RandomForest,40.0,age_band_55le_ > 0.00,-0.012255566156795438

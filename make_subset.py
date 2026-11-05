@@ -1,7 +1,7 @@
 """Tạo subset ngẫu nhiên (phân tầng) ở mức Student–Course từ OULAD.
 
 Chạy:
-    python make_subset.py --frac 0.2 --seed 42 --src data --out data_subset
+    python make_subset.py --frac 0.2 --seed 42 --src data_pure --out data_subset
 Mỗi seed khác nhau -> một subset khác nhau (dùng để lặp thí nghiệm / kiểm tra độ ổn định).
 Lấy mẫu phân tầng theo (code_presentation, final_result) để giữ tỉ lệ nhãn và đủ cả 4 đợt học.
 """
@@ -14,7 +14,7 @@ KMP = ["code_module", "code_presentation"]
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", default="data")
+    ap.add_argument("--src", default="data_pure", help="thư mục chứa dữ liệu OULAD gốc")
     ap.add_argument("--out", default="data_subset")
     ap.add_argument("--frac", type=float, default=0.2, help="tỉ lệ dòng Student–Course giữ lại")
     ap.add_argument("--seed", type=int, default=42)

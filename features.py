@@ -12,7 +12,7 @@ NAMES = ["courses", "assessments", "vle", "studentInfo",
          "studentRegistration", "studentAssessment", "studentVle"]
 
 
-def load(data_dir="data"):
+def load(data_dir="data_using"):
     d = {n: pd.read_csv(f"{data_dir}/{n}.csv", na_values=["?"]) for n in NAMES}
     sv = d["studentVle"]
     # Khóa (student, site, date) bị trùng với sum_click khác nhau -> cộng gộp lại
