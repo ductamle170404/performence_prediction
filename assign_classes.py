@@ -17,6 +17,7 @@ import pandas as pd
 KEYS = ["code_module", "code_presentation", "id_student"]
 ASSIGNMENTS_FILE = "student_class_assignments.csv"
 INSTRUCTORS_FILE = "class_instructors.csv"
+INSTRUCTOR_LIST_FILE = "instructors.csv"
 
 
 def build_assignments(registrations: pd.DataFrame, class_size: int) -> pd.DataFrame:
@@ -148,6 +149,26 @@ def build_instructors(assignments: pd.DataFrame) -> pd.DataFrame:
     return classes
 
 
+def build_instructor_list(class_instructors: pd.DataFrame) -> pd.DataFrame:
+    """Create one instructor master row per ID."""
+    if "instructor_id" not in class_instructors.columns:
+        raise ValueError("Class-instructor table is missing the instructor_id column.")
+    instructor_ids = class_instructors["instructor_id"]
+    has_blank_ids = instructor_ids.isna().any() or (
+        instructor_ids.astype("string").str.strip().eq("").any()
+    )
+    if has_blank_ids:
+        raise ValueError("Every class must have a non-empty instructor_id.")
+    return (
+        instructor_ids.astype("string")
+        .drop_duplicates()
+        .sort_values(kind="stable")
+        .rename("instructor_id")
+        .to_frame()
+        .reset_index(drop=True)
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -165,7 +186,7 @@ def main() -> None:
     parser.add_argument(
         "--overwrite",
         action="store_true",
-        help="Replace existing outputs, including synthetic instructor assignments.",
+        help="Replace existing outputs, including synthetic instructor assignments and roster.",
     )
     args = parser.parse_args()
 
@@ -176,10 +197,30 @@ def main() -> None:
     input_path = data_dir / "studentRegistration.csv"
     assignments_path = data_dir / ASSIGNMENTS_FILE
     instructors_path = data_dir / INSTRUCTORS_FILE
+    instructor_list_path = data_dir / INSTRUCTOR_LIST_FILE
     if not input_path.is_file():
         parser.error(f"Input file not found: {input_path}")
 
-    existing = [path.name for path in (assignments_path, instructors_path) if path.exists()]
+    if (
+        not args.overwrite
+        and assignments_path.is_file()
+        and instructors_path.is_file()
+        and not instructor_list_path.exists()
+    ):
+        existing_instructors = pd.read_csv(instructors_path, dtype="string")
+        instructor_list = build_instructor_list(existing_instructors)
+        instructor_list.to_csv(instructor_list_path, index=False)
+        print(
+            f"Created {instructor_list_path} "
+            f"({len(instructor_list):,} unique instructors)"
+        )
+        return
+
+    existing = [
+        path.name
+        for path in (assignments_path, instructors_path, instructor_list_path)
+        if path.exists()
+    ]
     if existing and not args.overwrite:
         parser.error(
             "Output file(s) already exist: "
@@ -194,12 +235,15 @@ def main() -> None:
     )
     assignments = build_assignments(registrations, args.class_size)
     instructors = build_instructors(assignments)
+    instructor_list = build_instructor_list(instructors)
 
     assignments.to_csv(assignments_path, index=False, na_rep="")
     instructors.to_csv(instructors_path, index=False)
+    instructor_list.to_csv(instructor_list_path, index=False)
     print(f"Created {assignments_path} ({len(assignments):,} student-course rows)")
     print(f"Created {instructors_path} ({len(instructors):,} classes)")
     print(f"Assigned {instructors['instructor_id'].nunique():,} synthetic instructors")
+    print(f"Created {instructor_list_path} ({len(instructor_list):,} unique instructors)")
 
 
 if __name__ == "__main__":
