@@ -10,9 +10,9 @@ from app.core.exceptions import DataSchemaError
 class CsvDataAdapter:
     # Tên logic -> các tên file chấp nhận (không phân biệt hoa thường).
     FILE_ALIASES: Dict[str, List[str]] = {
-        "assignments": ["student_class_assignment.csv"],
+        "assignments": ["student_class_assignments.csv"],
         "student_assessment": ["student_assessment.csv", "studentassetment.csv", "studentassessment.csv"],
-        "class_instructor": ["class_instructor.csv"],
+        "class_instructor": ["class_instructors.csv"],
         "courses": ["courses.csv"],
         "assessments": ["assessments.csv"],
     }
