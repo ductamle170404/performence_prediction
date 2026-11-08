@@ -1,2 +1,7 @@
 data_pure/*
 data_using/studentVle.csv
+__pycache__/
+.venv/
+node_modules/
+dist/
+.env
