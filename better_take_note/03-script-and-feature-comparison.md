@@ -2,20 +2,20 @@
 
 ## 1. `rank_list.py` và `check_features.py` nên ở đâu?
 
-Hiện tại, để hai file ở thư mục gốc là hợp lý nhất:
+Hai script hiện được nhóm trong `tools/`:
 
-- `rank_list.py` là script chạy mô hình để xếp hạng sinh viên theo rủi ro và ghi kết quả vào `ranked/`. Nó dùng `features.py`, đồng thời import `make_xy` và `TEST_PRES` từ `train_cls.py`.
-- `check_features.py` là công cụ kiểm tra các bộ feature trong `feature_sets/`; nó import `features_common.py` và nạp động các module feature.
+- `tools/ranking/rank_list.py` là script chạy mô hình để xếp hạng sinh viên theo rủi ro và ghi kết quả vào `ranked/`. Nó dùng `prediction/features.py`, đồng thời import `make_xy` và `TEST_PRES` từ `archive/training/train_cls.py`.
+- `tools/analysis/check_features.py` là công cụ kiểm tra các bộ feature trong `prediction/feature_sets/`; nó import `prediction/features_common.py` và nạp động các module feature.
 - Cả hai đều là công cụ chạy quy trình, không phải module định nghĩa bộ feature. Vì vậy không nên chuyển chúng vào `feature_sets/`. `ranked/` là nơi chứa kết quả, không phải nơi chứa script.
-- Repo hiện không có thư mục `scripts/` và các script đang import module ở thư mục gốc. Chuyển chúng vào `scripts/` ngay sẽ cần xử lý lại import/cách chạy. Nếu sau này muốn tổ chức riêng, có thể tạo `scripts/` sau khi chuẩn hóa entry point và các import dùng chung.
+- Các lệnh chạy ví dụ được ghi trong [`tools/README.md`](../tools/README.md).
 
 ## 2. `train.py`, `train_cls.py` và `predict_progress.py`
 
 | File | Mục đích | Đặc trưng và mốc | Mô hình/nhãn | Đầu ra, đánh giá |
 |---|---|---|---|---|
-| `train.py` | Thử phân loại và hồi quy tại các ngày cutoff cố định | Gọi `features.build(d, cutoff)`; dùng bộ feature cũ trong `features.py` | XGBoost và Random Forest; phân loại `at_risk` (Fail + Withdrawn), hồi quy `final_score` | `results/`; ngưỡng phân loại mặc định 0.5 hoặc `--threshold`; có MAE/RMSE/R² cho hồi quy |
-| `train_cls.py` | Thử phân loại tại các ngày cutoff cố định | Cũng gọi `features.build(d, cutoff)` | XGBoost, Random Forest, Logistic Regression; mặc định `at_risk`, có thể chọn `fail_only` | `results_cls/`; thêm recall/precision top-K và AUC theo môn; ngưỡng mặc định 0.5 |
-| `predict_progress.py` | Dự báo cảnh báo sớm theo phần trăm tiến độ môn | Mỗi lần chọn đúng một module trong `feature_sets/`; mặc định `xai`; mặc định các mốc 0, 10, 20, 30, 40, 50% | XGBoost, Random Forest, Logistic Regression; mặc định nhãn `fail_only`, có thể chọn `at_risk` | `predict/`; có OOF để chọn ngưỡng theo recall mục tiêu, các chỉ số top-K, importance và tùy chọn SHAP/LIME |
+| `archive/training/train.py` | Thử phân loại và hồi quy tại các ngày cutoff cố định | Gọi `features.build(d, cutoff)`; dùng bộ feature cũ trong `prediction/features.py` | XGBoost và Random Forest; phân loại `at_risk` (Fail + Withdrawn), hồi quy `final_score` | `archive/training/results/`; ngưỡng phân loại mặc định 0.5 hoặc `--threshold`; có MAE/RMSE/R² cho hồi quy |
+| `archive/training/train_cls.py` | Thử phân loại tại các ngày cutoff cố định | Cũng gọi `features.build(d, cutoff)` | XGBoost, Random Forest, Logistic Regression; mặc định `at_risk`, có thể chọn `fail_only` | `archive/training/results_cls/`; thêm recall/precision top-K và AUC theo môn; ngưỡng mặc định 0.5 |
+| `prediction/predict_progress.py` | Dự báo cảnh báo sớm theo phần trăm tiến độ môn | Mỗi lần chọn đúng một module trong `prediction/feature_sets/`; mặc định `xai`; mặc định các mốc 0, 10, 20, 30, 40, 50% | XGBoost, Random Forest, Logistic Regression; mặc định nhãn `fail_only`, có thể chọn `at_risk` | `database/predictions/` mặc định; kết quả cũ trong `predict/` vẫn được giữ; có OOF để chọn ngưỡng theo recall mục tiêu, các chỉ số top-K, importance và tùy chọn SHAP/LIME |
 
 Ba file có điểm chung là chia train/test theo presentation mặc định: train trên `2013B`, `2013J`, `2014B`, test trên `2014J`. Tuy nhiên chúng **không tương đương**: hai file `train*` dùng cùng pipeline feature cũ, còn `predict_progress.py` dùng một trong sáu feature builder riêng; hai bên cũng khác cutoff, target mặc định và cách chọn ngưỡng.
 
@@ -51,11 +51,11 @@ Vì vậy `features_common.py` không phải bản sao hay bản nâng cấp tr�
 
 ## 4. File liên quan
 
-- [features.py](../features.py)
-- [features_common.py](../features_common.py)
-- [train.py](../train.py)
-- [train_cls.py](../train_cls.py)
-- [rank_list.py](../rank_list.py)
-- [check_features.py](../check_features.py)
-- [predict_progress.py](../predict_progress.py)
-- [feature_sets_overview.md](../feature_sets_overview.md)
+- [features.py](../prediction/features.py)
+- [features_common.py](../prediction/features_common.py)
+- [train.py](../archive/training/train.py)
+- [train_cls.py](../archive/training/train_cls.py)
+- [rank_list.py](../tools/ranking/rank_list.py)
+- [check_features.py](../tools/analysis/check_features.py)
+- [predict_progress.py](../prediction/predict_progress.py)
+- [feature_sets_overview.md](../prediction/feature_sets/feature_sets_overview.md)

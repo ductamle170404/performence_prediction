@@ -71,12 +71,12 @@ Với XGBoost, mỗi bộ feature được chọn là một cấu hình đầu v
 
 ## File liên quan
 
-- [predict_progress.py](../predict_progress.py)
-- [features_common.py](../features_common.py)
-- [features.py](../features.py)
-- [features_kuznetsov_ews.py](../feature_sets/features_kuznetsov_ews.py)
-- [features_wu_jia.py](../feature_sets/features_wu_jia.py)
-- [features_joive.py](../feature_sets/features_joive.py)
-- [features_mtapsp.py](../feature_sets/features_mtapsp.py)
-- [features_xai.py](../feature_sets/features_xai.py)
-- [features_trajectory.py](../feature_sets/features_trajectory.py)
+- [predict_progress.py](../prediction/predict_progress.py)
+- [features_common.py](../prediction/features_common.py)
+- [features.py](../prediction/features.py)
+- [features_kuznetsov_ews.py](../prediction/feature_sets/features_kuznetsov_ews.py)
+- [features_wu_jia.py](../prediction/feature_sets/features_wu_jia.py)
+- [features_joive.py](../prediction/feature_sets/features_joive.py)
+- [features_mtapsp.py](../prediction/feature_sets/features_mtapsp.py)
+- [features_xai.py](../prediction/feature_sets/features_xai.py)
+- [features_trajectory.py](../prediction/feature_sets/features_trajectory.py)

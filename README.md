@@ -171,18 +171,30 @@ performance_prediction/
 │   └── predictions/                  # Prediction output CSV (nếu lưu file)
 │
 ├── prediction/                       # Python ML pipeline (tách biệt)
-│   ├── models/                       # Model artifacts, ví dụ .json/.pkl
-│   ├── features/                     # Feature engineering
-│   ├── inference/                    # Hàm predict dùng bởi PredictionService
-│   ├── training/                     # Script train/evaluate
+│   ├── predict_progress.py           # Pipeline dự đoán đang dùng
+│   ├── features.py                   # Feature/label cơ sở, dùng chung
+│   ├── features_common.py            # Helper cho các feature set
+│   ├── feature_sets/                 # Các bộ feature của pipeline
 │   └── README.md
+│
+├── archive/
+│   └── training/                     # train.py và train_cls.py cũ
+│
+├── tools/
+│   ├── data/                         # assign_classes.py, make_subset.py
+│   ├── analysis/                     # check_features.py, audit_xgb_cutoff.py
+│   ├── ranking/                      # rank_list.py
+│   ├── dashboard/                    # Dashboard xem kết quả + hướng dẫn
+│   └── data_checks/                  # Các script kiểm tra dữ liệu
+│
+├── predict/                          # Kết quả cũ, giữ nguyên để tra cứu
 │
 └── tests/
     ├── backend/
     └── frontend/
 ```
 
-Các script hiện có như `features.py`, `features_common.py`, `predict_progress.py`, `train.py`, `train_cls.py`, `feature_sets/`, `predict/`, `predict_xai/`, `results_cls/` nên được giữ trong `prediction/` hoặc được di chuyển dần vào các module tương ứng. Không cần viết lại toàn bộ pipeline ngay từ đầu; hãy tạo một interface inference ổn định để backend gọi pipeline hiện tại.
+Pipeline chính hiện nằm trong `prediction/`; kết quả chạy cũ vẫn được giữ trong `predict/` và `predict_xai/`. Các script train cũ được lưu tại `archive/training/`, còn script tiện ích được nhóm trong `tools/`. `features.py` và `features_common.py` thuộc pipeline đang chạy; các script train cũ cũng dùng lại `features.py`.
 
 ## 3. Class architecture – Frontend
 
@@ -538,7 +550,17 @@ Các giá trị trên chỉ là dữ liệu minh họa cho định dạng respon
 
 ## 5. Tích hợp prediction pipeline hiện tại
 
-Các script hiện có (`train.py`, `train_cls.py`, `features.py`, `features_common.py`, `predict_progress.py`, `feature_sets/`, `predict/`, `predict_xai/`) nên tiếp tục chạy độc lập để huấn luyện và đánh giá model.
+Chạy pipeline dự đoán chính từ thư mục gốc:
+
+```powershell
+python prediction\predict_progress.py --data data_subset --no-shap --no-lime
+```
+
+Mặc định, các CSV và artifact của lần chạy mới được ghi vào `database/predictions/`. Có thể truyền `--out <path>` để chọn thư mục khác. Các kết quả cũ trong `predict/` và `predict_xai/` không bị di chuyển hoặc ghi đè.
+
+Hai dashboard được gom trong `tools/dashboard/`. Hướng dẫn mở dashboard và xem cả kết quả cũ nằm tại [`tools/dashboard/README.md`](tools/dashboard/README.md).
+
+Các tiện ích được phân nhóm dưới `tools/`; mục đích và lệnh chạy nằm tại [`tools/README.md`](tools/README.md). Hai script huấn luyện trước đây không còn là entry point chính, được lưu trong `archive/training/`.
 
 Đề xuất tích hợp theo hai giai đoạn:
 

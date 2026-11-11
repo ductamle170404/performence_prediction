@@ -2,8 +2,8 @@
 
 ## Phạm vi
 
-Hai chương trình [train.py](../train.py) và [train_cls.py](../train_cls.py) đều
-gọi `F.build(d, cutoff)` trong [features.py](../features.py), sau đó gọi
+Hai chương trình [train.py](../archive/training/train.py) và [train_cls.py](../archive/training/train_cls.py) đều
+gọi `F.build(d, cutoff)` trong [features.py](../prediction/features.py), sau đó gọi
 `make_xy(df)`. Vì vậy, phần lớn feature đầu vào của hai chương trình là giống
 nhau. Khác biệt chính là:
 
